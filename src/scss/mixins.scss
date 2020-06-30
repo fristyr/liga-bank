@@ -1,0 +1,40 @@
+@mixin bp($breakpoint) {
+  @if $breakpoint==desktop-lg {
+    @media only screen and (max-width: $desktop-lg) {
+      @content;
+    }
+  }
+
+  @if $breakpoint==desktop-md {
+    @media only screen and (max-width: $desktop-md) {
+      @content;
+    }
+  }
+
+  @if $breakpoint==desktop-sm {
+    @media only screen and (max-width: $desktop-sm) {
+      @content;
+    }
+  }
+
+  @if $breakpoint==tablet {
+    @media only screen and (max-width: $tablet) {
+      @content;
+    }
+  }
+
+  @if $breakpoint==mobile {
+    @media only screen and (max-width: $mobile) {
+      @content;
+    }
+  }
+}
+
+$maxWidth: 1366;
+@mixin adaptiv-font($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $maxWidth: $maxWidth - 320;
+  font-size: calc(
+    #{$mobSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth})
+  );
+}
