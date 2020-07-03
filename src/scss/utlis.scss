@@ -4,8 +4,34 @@ html {
 
 body {
   font-family: 'Roboto-Regular';
-  background-color: #f2f2f2;
 }
 a {
   text-decoration: none;
+}
+
+.button {
+  display: block;
+  border: none;
+  background-color: $accent-color;
+  color: $seconday-color;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  border-radius: 4px;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  cursor: pointer;
+  transition: 250ms;
+  border: 1px solid transparent;
+  
+  &--small {
+    width: 198px;
+  }
+
+  &--light {
+    background-color: $seconday-color;
+    color: $main-color;
+  }
 }
