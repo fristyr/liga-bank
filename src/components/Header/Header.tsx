@@ -40,7 +40,7 @@ const useStyles = makeStyles({
 
 export const Header: React.FC = () => {
   const [burgerVisibility, setBurgerVisibility] = React.useState(false);
-  const [loginVisibility, setLoginVisibility] = React.useState(true);
+  const [loginVisibility, setLoginVisibility] = React.useState(false);
 
   const styles = useStyles();
 
