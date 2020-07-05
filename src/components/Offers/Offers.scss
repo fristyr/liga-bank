@@ -34,39 +34,201 @@
 }
 
 .offer {
+  position: relative;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  padding-top: 60px;
-  padding-left: 70px;
+  padding-top: 51px;
+  padding-bottom: 60px;
+  margin-left: 70px;
+  @include bp(desktop-sm) {
+    margin-left: 45px;
+    padding-top: 54px;
+  }
+  @include bp(tablet) {
+    margin-left: 15px;
+  }
+  &__wrapper-img {
+    @include bp(tablet) {
+      position: absolute;
+      z-index: -1;
+      right: 0;
+      top: 93px;
+    }
+  }
   &-img {
     max-width: 440px;
     max-height: 290px;
+    margin-top: 7px;
+    @include bp(desktop-sm) {
+      max-width: 289px;
+      max-height: 260px;
+      margin-top: 5px;
+    }
+    @include bp(tablet) {
+      max-width: 87px;
+      max-height: 113px;
+    }
   }
 }
 
 .description {
+  &--0 {
+    margin-right: 124px;
+    @include bp(desktop-sm) {
+      margin-right: 9px;
+    }
+  }
+  &--1 {
+    margin-right: 186px;
+
+    @include bp(desktop-sm) {
+      margin-right: 0;
+    }
+  }
+  &--2 {
+    @include bp(desktop-sm) {
+      margin-right: 109px;
+    }
+    @include bp(tablet) {
+      margin-right: 0;
+    }
+  }
+  &--3 {
+    margin-right: 120px;
+    @include bp(desktop-sm) {
+      margin-right: 29px;
+    }
+    @include bp(tablet) {
+      margin-right: 0;
+      max-width: 290px;
+      width: 100%;
+    }
+  }
   &__list {
+    margin-bottom: 16px;
     &--0 {
       max-width: 400px;
+      @include bp(desktop-sm) {
+        max-width: 380px;
+        margin-bottom: 16px;
+      }
+      @include bp(tablet) {
+        max-width: 230px;
+        margin-bottom: 15px;
+      }
+    }
+    &--3 {
+      max-width: 360px;
+      @include bp(tablet) {
+        max-width: 220px;
+      }
     }
   }
   &__icon {
     margin-right: 10px;
+    @include bp(tablet) {
+      max-width: 8px;
+      max-height: 6px;
+      margin-right: 8px;
+    }
   }
   &__title {
     font-size: 22px;
     line-height: 31px;
     color: $main-color;
-    margin-bottom: 40px;
+    margin-bottom: 27px;
+
+    @include bp(desktop-sm) {
+      max-width: 280px;
+      margin-right: 0;
+      margin-bottom: 23px;
+      font-size: 18px;
+      line-height: 25px;
+    }
+    @include bp(tablet) {
+      font-size: 16px;
+      line-height: 22px;
+      margin-bottom: 21px;
+    }
     &--0 {
       max-width: 371px;
+
+      @include bp(tablet) {
+        max-width: 290px;
+      }
+    }
+    &--1 {
+      max-width: 286px;
+      @include bp(desktop-sm) {
+        max-width: 265px;
+      }
+      @include bp(tablet) {
+        max-width: 235px;
+      }
+    }
+    &--2 {
+      max-width: 340px;
+      margin-right: 186px;
+    }
+    &--3 {
+      max-width: 406px;
+      @include bp(desktop-sm) {
+        max-width: 340px;
+      }
+      @include bp(tablet) {
+        max-width: 230px;
+      }
     }
   }
   &__text {
+    display: flex;
+    align-items: baseline;
     font-size: 18px;
     line-height: 23px;
-    padding-bottom: 25px;
+    padding-bottom: 15px;
+    @include bp(desktop-sm) {
+      font-size: 16px;
+      line-height: 21px;
+    }
+    @include bp(tablet) {
+      font-size: 14px;
+      line-height: 18px;
+      padding-bottom: 12px;
+    }
+  }
+  &__aditional {
+    max-width: 338px;
+    font-size: 18px;
+    line-height: 25px;
+    & a {
+      text-decoration: underline;
+      font-weight: bold;
+      color: inherit;
+    }
+    @include bp(desktop-sm) {
+      font-size: 16px;
+      line-height: 22px;
+    }
+    @include bp(tablet) {
+      font-size: 14px;
+      line-height: 20px;
+    }
+  }
+  &__button {
+    max-width: 196px;
+    font-size: 16px;
+    line-height: 19px;
+    @include bp(desktop-sm) {
+      padding-top: 13px;
+      padding-bottom: 13px;
+    }
+    @include bp(tablet) {
+      max-width: 100%;
+      font-size: 14px;
+      line-height: 16px;
+      padding-top: 12px;
+      padding-bottom: 12px;
+    }
   }
 }
 

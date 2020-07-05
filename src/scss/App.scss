@@ -1,3 +1,6 @@
+@import '../scss/variables.scss';
+@import '../scss/mixins.scss';
+
 .app {
   max-width: 1366px;
   width: 100%;
@@ -7,5 +10,8 @@
 .content-wrapper {
   max-width: 1170px;
   margin: 0 auto;
-  padding-top: 60px;
+  padding-top: 59px;
+  @include bp(desktop-sm) {
+    padding-top: 0;
+  }
 }
