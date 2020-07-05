@@ -33,7 +33,7 @@ export const Slider: React.FC = () => {
           imgMobileWebp,
           imgMobileJpg,
         }) => (
-          <section className="slider__item">
+          <section className="slider__item" key={id}>
             <div className={`slide-info slide-info--${id}`}>
               <h1 className="slide-info__title">Лига Банк</h1>
               <p className={`slide-info__description slide-info__description--${id}`}>{description}</p>
