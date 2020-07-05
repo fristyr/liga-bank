@@ -1,0 +1,78 @@
+@import '../../scss/variables.scss';
+@import '../../scss/mixins.scss';
+
+.offers-nav {
+  display: flex;
+  @include bp(desktop-sm) {
+    display: none;
+  }
+  &__product-icon {
+    margin-right: 10px;
+  }
+  &__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 293px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    width: 100%;
+    font-size: 18px;
+    line-height: 21px;
+    background-color: transparent;
+    color: $main-color;
+    border-radius: 0;
+    transition: 250ms;
+    &--active {
+      background-color: $seconday-color;
+    }
+  }
+}
+
+.offers-content {
+  background-color: $seconday-color;
+}
+
+.offer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-top: 60px;
+  padding-left: 70px;
+  &-img {
+    max-width: 440px;
+    max-height: 290px;
+  }
+}
+
+.description {
+  &__list {
+    &--0 {
+      max-width: 400px;
+    }
+  }
+  &__icon {
+    margin-right: 10px;
+  }
+  &__title {
+    font-size: 22px;
+    line-height: 31px;
+    color: $main-color;
+    margin-bottom: 40px;
+    &--0 {
+      max-width: 371px;
+    }
+  }
+  &__text {
+    font-size: 18px;
+    line-height: 23px;
+    padding-bottom: 25px;
+  }
+}
+
+.swiper-offer-pagination {
+  display: none;
+  @include bp(desktop-sm) {
+    display: block;
+  }
+}

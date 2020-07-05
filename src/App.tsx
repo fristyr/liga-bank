@@ -1,6 +1,6 @@
 import React from 'react';
 import './scss/App.scss';
-import { Header, Slider } from './components';
+import { Header, Slider, Offers } from './components';
 
 
 function App() {
@@ -9,6 +9,9 @@ function App() {
       <Header />
       <main>
         <Slider />
+        <section className="content-wrapper">
+          <Offers />
+        </section>
       </main>
     </div>
   );

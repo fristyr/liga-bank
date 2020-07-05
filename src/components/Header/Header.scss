@@ -6,36 +6,41 @@
   display: flex;
   align-items: baseline;
   background-color: $seconday-color;
-  padding: 25px 98px 35px 61px;
+  padding: 27px 98px 33px 61px;
   @include bp(desktop-md) {
     justify-content: space-between;
     align-items: center;
-    padding: 23px 45px 24px 45px;
+    padding: 23px 45px 22px 37px;
   }
   @include bp(tablet) {
-    padding: 12px 15px 19px 45px;
+    padding: 12px 15px 18px 43px;
+    align-items: baseline;
   }
   &__logo {
-    max-width: 150px;
-    max-height: 25px;
+    max-width: 149px;
+    max-height: 27px;
     width: 100%;
     height: 100%;
     margin-right: 58px;
     cursor: pointer;
     @include bp(desktop-md) {
-      max-width: 133px;
-      max-height: 22px;
+      max-width: 147px;
+      max-height: 24px;
       margin-right: 0;
     }
     @include bp(tablet) {
-      max-width: 113px;
-      max-height: 17px;
+      max-width: 115px;
+      max-height: 21px;
+      margin-top: -3px;
     }
   }
 }
 
 .nav {
   &__lg {
+    @include bp(desktop-md) {
+      padding-left: 14px;
+    }
     @include bp(tablet) {
       display: none;
     }
@@ -45,7 +50,10 @@
     line-height: 19px;
     color: $main-color;
     transition: 250ms;
-    padding-right: 20px;
+    padding-right: 24px;
+    @include bp(desktop-md) {
+      padding-right: 21px;
+    }
     @include bp(tablet) {
       padding-right: 0;
       padding-left: 20px;
@@ -62,7 +70,7 @@
       display: block;
       position: absolute;
       left: 15px;
-      bottom: 16px;
+      bottom: 13px;
     }
   }
   &__sm {
@@ -148,7 +156,7 @@
       }
     }
     &__button {
-      width:100%;
+      width: 100%;
       &:hover {
         background-color: $seconday-color;
         color: $accent-color;
