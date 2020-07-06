@@ -5,9 +5,9 @@ import offersList from './offersList';
 import classNames from 'classnames';
 import './Offers.scss';
 
-export const Offers: React.FC = () => {
+export const Offers: FC = () => {
   const swiperRef = useRef<SwiperRefNode>(null);
-  const [slideIndex, setSlideIndex] = useState(2);
+  const [slideIndex, setSlideIndex] = useState();
 
   const params = {
     pagination: {
@@ -40,7 +40,7 @@ export const Offers: React.FC = () => {
   }, [slideIndex]);
 
   return (
-    <section>
+    <section className="offers">
       <div className="offers-nav">
         {offersList.map((item, index) => (
           <button

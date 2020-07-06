@@ -1,9 +1,11 @@
 import React from 'react';
 import './scss/App.scss';
-import { Header, Slider, Offers } from './components';
+import { Header, Slider, Offers, Calculator } from './components';
 
 
 function App() {
+
+  
   return (
     <div className="app">
       <Header />
@@ -11,6 +13,8 @@ function App() {
         <Slider />
         <section className="content-wrapper">
           <Offers />
+          <Calculator />
+          
         </section>
       </main>
     </div>

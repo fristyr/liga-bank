@@ -1,6 +1,10 @@
 @import '../../scss/variables.scss';
 @import '../../scss/mixins.scss';
 
+.offers {
+  margin-bottom: 94px;
+}
+
 .offers-nav {
   display: flex;
   @include bp(desktop-sm) {

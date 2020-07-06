@@ -1,0 +1,14 @@
+.calculator {
+  &__title {
+    margin-bottom: 47px;
+    font-family: 'Roboto-Bold', sans-serif;
+    font-size: 41px;
+    line-height: 57px;
+  }
+  &__step {
+    margin-bottom: 22px;
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 31px;
+  }
+}
