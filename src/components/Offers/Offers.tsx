@@ -5,7 +5,7 @@ import offersList from './offersList';
 import classNames from 'classnames';
 import './Offers.scss';
 
-export const Offers: React.FC = () => {
+export const Offers: FC = () => {
   const swiperRef = useRef<SwiperRefNode>(null);
   const [slideIndex, setSlideIndex] = useState();
 
@@ -40,7 +40,7 @@ export const Offers: React.FC = () => {
   }, [slideIndex]);
 
   return (
-    <section>
+    <section className="offers">
       <div className="offers-nav">
         {offersList.map((item, index) => (
           <button
@@ -65,8 +65,9 @@ export const Offers: React.FC = () => {
             ({
               id,
               title,
-              aditionalText,
+              __html,
               descriptionList,
+              buttonLink,
               imgDesktopWebp,
               imgDesktopJpg,
               imgTabletWebp,
@@ -76,17 +77,18 @@ export const Offers: React.FC = () => {
             }) => (
               <article key={id}>
                 <div className="offer">
-                  <div className="offer__description description">
+                  <div className={`description description--${id}`}>
                     <h2 className={`description__title description__title--${id}`}>{title}</h2>
                     <ul className={`description__list description__list--${id}`}>
                       {descriptionList.map((item, index) => (
                         <li key={index} className="description__text" >
                           <img className="description__icon" src={process.env.PUBLIC_URL + '/assets/checkmark.svg' } alt="checkmark"/>
-                          {item}
+                          <span dangerouslySetInnerHTML={{ __html: `${item}` }} ></span>
                         </li>
                       ))}
                     </ul>
-                    {aditionalText && <p>{aditionalText}</p>}
+                    {buttonLink && <a href={buttonLink} className="button description__button" >Узнать подробнее</a>}
+                    {__html && <p className="description__aditional" dangerouslySetInnerHTML={{__html}} ></p>}
                   </div>
                   <div className="offer__wrapper-img ">
                     <picture>

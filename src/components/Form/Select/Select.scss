@@ -1,0 +1,10 @@
+@import '../../../scss/variables.scss';
+@import '../../../scss/mixins.scss';
+
+
+.menu__select {
+  transition: all .2s ease;
+  &--open {
+    transform: rotate(180deg);
+  }
+}

@@ -9,7 +9,7 @@ const offersList = [
       'Разнообразные условия',
       'Возможность ежемесячной капитализации или вывод процентов на банковскую карту',
     ],
-    buttonText: 'Узнать подробнее',
+    
     buttonLink: '/test',
     imgDesktopWebp: '/assets/offers/big/offer-1.webp',
     imgDesktopJpg: '/assets/offers/big/offer-1.jpg',
@@ -28,8 +28,8 @@ const offersList = [
       'Автокредит',
       'Потребительский кредит',
     ],
-    aditionalText:
-      'Рассчитайте ежемесячный платежи ставку по кредиту воспользовавшись нашим кредитным калькулятором',
+    __html:
+      'Рассчитайте ежемесячный платеж <br /> и ставку по кредиту воспользовавшись нашим <a href="/test" >кредитным калькулятором</a> ',
     imgDesktopWebp: '/assets/offers/big/offer-2.webp',
     imgDesktopJpg: '/assets/offers/big/offer-2.jpg',
     imgTabletWebp: '/assets/offers/middle/offer-2.webp',
@@ -47,7 +47,7 @@ const offersList = [
       'Страхование жизни и здоровья',
       'Страхование недвижимости',
     ],
-    buttonText: 'Узнать подробнее',
+    
     buttonLink: '/test',
     imgDesktopWebp: '/assets/offers/big/offer-3.webp',
     imgDesktopJpg: '/assets/offers/big/offer-3.jpg',
@@ -63,11 +63,9 @@ const offersList = [
     title:
       'Лига Банк — это огромное количество онлайн-сервисов для вашего удобства',
     descriptionList: [
-      'Мобильный банк,который всегда под рукой',
+      'Мобильный банк,<br />который всегда под рукой',
       'Приложение Лига-проездной позволит вам оплачивать билеты по всему миру',
-      'Узнать подробнее',
     ],
-    buttonText: 'Узнать подробнее',
     buttonLink: '/test',
     imgDesktopWebp: '/assets/offers/big/offer-4.webp',
     imgDesktopJpg: '/assets/offers/big/offer-4.jpg',
