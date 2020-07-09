@@ -10,19 +10,19 @@ a {
 }
 
 .visually-hidden:not(:focus):not(:active),
-input[type="checkbox"].visually-hidden,
-input[type="radio"].visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    border: 0;
-    padding: 0;
-    white-space: nowrap;
-    -webkit-clip-path: inset(100%);
-    clip-path: inset(100%);
-    clip: rect(0 0 0 0);
-    overflow: hidden;
+input[type='checkbox'].visually-hidden,
+input[type='radio'].visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  -webkit-clip-path: inset(100%);
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
 }
 
 .button {
@@ -41,7 +41,7 @@ input[type="radio"].visually-hidden {
   cursor: pointer;
   transition: 250ms;
   border: 1px solid transparent;
-  
+
   &--small {
     width: 198px;
   }
@@ -59,7 +59,7 @@ li {
   list-style: none;
 }
 
-.horizontal-slider{
+.horizontal-slider {
   height: 10px;
   &__thumb {
     background: $accent-color;
@@ -74,4 +74,12 @@ li {
     background: $seconday-color;
     cursor: pointer;
   }
+}
+
+.custom-input {
+  padding: 20px;
+  border: 1px solid #0a1e32;
+  border-radius: 4px;
+  background-color: transparent;
+  width: 100%;
 }

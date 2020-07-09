@@ -1,0 +1,54 @@
+@import '../../scss/variables.scss';
+@import '../../scss/mixins.scss';
+
+.application-form {
+  padding: 70px;
+  background-color: $seconday-color;
+  max-width: 630px;
+  margin: 0 auto;
+  &__title {
+    text-align: center;
+    margin-bottom: 42px;
+  }
+  &__button {
+    margin: 0 auto;
+    padding: 20px 58px 20px 58px;
+  }
+}
+
+.req-block {
+  margin-bottom: 30px;
+}
+
+.req-item {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #c4c4c4;
+  &__title {
+    font-size: 16px;
+    line-height: 22px;
+    color: $helper-dark-color;
+  }
+  &__description {
+    font-size: 22px;
+    line-height: 31px;
+    font-weight: bold;
+  }
+}
+
+.req-inputs {
+  &__el {
+    max-width: 588px;
+  }
+}
+
+.grid-input {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  &__el {
+    max-width: 258px;
+  }
+}

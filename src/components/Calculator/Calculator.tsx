@@ -10,9 +10,10 @@ import './Calculator.scss';
 
 export const Calculator: FC = () => {
   const [selectValue, setSelectValue] = useState(1);
-  const [priceValue, setPriceValue] = useState(3400000);
+  const [priceValue, setPriceValue] = useState(2000000);
   // eslint-disable-next-line
   const [initialFee, setInitialFee] = useState(0);
+
   // eslint-disable-next-line
   const [percent, setPercent] = useState(10);
 
@@ -22,17 +23,21 @@ export const Calculator: FC = () => {
 
   const onChange = (value: number) => {
     setPriceValue(value);
+
+    //setPercent((initialFee / priceValue) * 100)
+    
   };
-  const onChangeInitialFee = (value: number) => {
+  const onChangeInitialFee = (value: any) => {
     setInitialFee(value);
+    setPercent((value / priceValue) * 100);
   };
   const onYearChange = (value: number) => {
     setYears(value);
   };
 
-  useEffect ( () => {
-    setInitialFee((priceValue / 100) * percent)
-  } , [priceValue])
+  useEffect(() => {
+    setInitialFee((priceValue / 100) * percent);
+  }, [priceValue, percent]);
 
   const downHandler = (
     <div className="cost-coltroll__button">
@@ -116,14 +121,14 @@ export const Calculator: FC = () => {
             thumbClassName="horizontal-slider__thumb"
             trackClassName="horizontal-slider__track"
             renderThumb={(props) => <div {...props}></div>}
+            value={percent}
             step={5}
             min={10}
             max={100}
             onChange={(value: any) => setPercent(value)}
           />
           <span className="calculator__price-gap">
-             %
-            {console.log( percent  ) }
+            {Math.trunc(percent * 100) / 100} %{' '}
           </span>
           <p className="calculator__description">Условия кредита</p>
           <label className="cost-coltroll" htmlFor="loan-terms">

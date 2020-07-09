@@ -1,6 +1,6 @@
 import React from 'react';
 import './scss/App.scss';
-import { Header, Slider, Offers, Calculator } from './components';
+import { Header, Slider, Offers, Calculator, Footer } from './components';
 
 
 function App() {
@@ -17,6 +17,7 @@ function App() {
           
         </section>
       </main>
+      <Footer />
     </div>
   );
 }
