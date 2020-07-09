@@ -5,6 +5,9 @@ export  const customStyles = {
   container: (base: any) => ({
     ...base,
     maxWidth: '600px',
+    '@media only screen and (max-width: 1023px) ': {
+      maxWidth: '100%'
+    }
   }),
   
   placeholder: (base: any) => ({
@@ -14,21 +17,21 @@ export  const customStyles = {
     fontSize: '16px',
     lineHeight: '22px',
   }),
-  dropdownIndicator: (base: any, state: any) => ({
+  /* dropdownIndicator: (base: any, state: any) => ({
     ...base,
     transition: 'all .2s ease',
     transform: state.selectProps.menuIsOpen ? 'rotate(180deg)' : null,
-  }),
+  }), */
   control: (base: any, state: any) => ({
     ...base,
     cursor: 'pointer',
     background: 'transparent',
-    borderRadius: state.isFocused ? '4px 4px 0 0' : 4,
+    borderRadius: state.selectProps.menuIsOpen ? '4px 4px 0 0' : 4,
     padding: '15px',
-    borderColor: state.isFocused ? accentColor : mainColor,
-    boxShadow: state.isFocused ? null : null,
+    borderColor: state.selectProps.menuIsOpen ? accentColor : mainColor,
+    boxShadow: state.selectProps.menuIsOpen ? null : null,
     '&:hover': {
-      borderColor: state.isFocused ? accentColor : accentColor,
+      borderColor: state.selectProps.menuIsOpen ? accentColor : accentColor,
     },
   }),
   menu: (base: any) => ({
