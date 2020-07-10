@@ -7,8 +7,6 @@ interface Props {
   priceValue: any
 }
 
-
-
 export const Checkbox: FC<Props> = ({onCheckboxChange, maternityCapital, priceValue}) => {
   const onChange = (e: any) => {
     onCheckboxChange(e.target.checked)
