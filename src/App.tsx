@@ -1,6 +1,6 @@
 import React from 'react';
 import './scss/App.scss';
-import { Header, Slider, Offers, Calculator, Footer } from './components';
+import { Header, Slider, Offers, Calculator, Footer, ApplicationRequest } from './components';
 
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
         <section className="content-wrapper">
           <Offers />
           <Calculator />
-          
+          <ApplicationRequest />
         </section>
       </main>
       <Footer />

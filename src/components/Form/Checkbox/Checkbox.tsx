@@ -2,31 +2,25 @@ import React, { FC } from 'react';
 import './Checkbox.scss'
 
 interface Props {
-  onCheckboxChange: (value: boolean ) => void;
-  maternityCapital?: any,
-  priceValue: any
+  onCheckboxChange?: (v: boolean ) => void;
+  checboxLabel?: string,
+  id?: string,
 }
 
-export const Checkbox: FC<Props> = ({onCheckboxChange, maternityCapital, priceValue}) => {
-  const onChange = (e: any) => {
-    onCheckboxChange(e.target.checked)
-    if(e.target.checked) {
-      maternityCapital(priceValue - 470000)
-    } else {
-      maternityCapital(priceValue + 470000)
-    }
-  }
+export const Checkbox: FC<Props> = ({onCheckboxChange, checboxLabel, id}) => {
   return (
     <div>
       <input
         className="filter-checkbox visually-hidden"
         type="checkbox"
         name="checkbox"
-        id="matrninity-capital"
-        onChange={ onChange }
+        id={id}
+        onChange={e => {
+          if (onCheckboxChange !== undefined) onCheckboxChange(e.target.checked);
+        }}
       />
-      <label htmlFor="matrninity-capital">
-        <span>Материнский капитал</span>
+      <label htmlFor={id}>
+        <span>{checboxLabel}</span>
       </label>
     </div>
   );
