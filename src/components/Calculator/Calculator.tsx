@@ -25,7 +25,7 @@ export const Calculator: FC = () => {
   const [psValue, setPsValue] = useState(9);
   const [cascoValue, setCascoValue] = useState(false);
   const [lifeInsurance, setLifeInsrunce] = useState(false);
-
+  // eslint-disable-next-line
   const [bankParticipant, setBankParticipant] = useState(false);
 
   const onChange = (value: number) => {
@@ -40,14 +40,18 @@ export const Calculator: FC = () => {
   };
 
   useEffect(() => {
-    setPercent(selectValue === 1 ? 10 : selectValue === 2 ? 20 : 0);
-    setPriceValue(2000000);
-  }, [selectValue]);
-
-  useEffect(() => {
     if (selectValue === 1) {
       percent <= 15 ? setPsValue(9.4) : setPsValue(8.5);
     }
+  });
+
+  useEffect(() => {
+    setPercent(selectValue === 1 ? 10 : selectValue === 2 ? 20 : 0);
+    setPriceValue(2000000);
+    setYears(1)
+  }, [selectValue]);
+
+  useEffect(() => {
     if (selectValue === 2) {
       priceValue <= 2000000 ? setPsValue(16) : setPsValue(15);
     }
@@ -61,8 +65,6 @@ export const Calculator: FC = () => {
   useEffect(() => {
     cascoValue && lifeInsurance ? setPsValue(3.5) : setPsValue(8.5);
   }, [selectValue, cascoValue, lifeInsurance]);
-
-
 
   useEffect(() => {
     setInitialFee((priceValue / 100) * percent);
@@ -108,9 +110,9 @@ export const Calculator: FC = () => {
     let PS;
     if (selectValue === 1) {
       PS = percent <= 15 ? 0.00783 : 0.00708;
-    } else  {
+    } else {
       PS = psValue / 100 / 12;
-    } 
+    }
     return PS;
   };
   const PS = returnPs();
@@ -273,6 +275,7 @@ export const Calculator: FC = () => {
               min={1}
               step={1}
               max={selectValue === 3 ? 7 : 30}
+              value={yaers}
               onChange={(value: any) => setYears(value)}
             />
             <span className="calculator__price-gap">{yaers} лет</span>
@@ -343,7 +346,23 @@ export const Calculator: FC = () => {
                 Оформить заявку
               </button>
             </div>
-          ) : null}
+          ) : (
+            <div className="calculator__offer">
+              <div className="bank-offer bank-offer--no-offer">
+                <h2 className="bank-offer__title">
+                  Наш банк не выдаёт ипотечные кредиты меньше{' '}
+                  <span>
+                    {selectValue === 1 && '500 000'}
+                    {selectValue === 2 && '200 000'}
+                  </span>{' '}
+                  рублей
+                </h2>
+                <p className="offer-option__description">
+                  Попробуйте использовать другие параметры для расчёта.
+                </p>
+              </div>
+            </div>
+          )}
         </div>
       )}
     </section>
