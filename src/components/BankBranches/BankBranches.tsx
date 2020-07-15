@@ -6,8 +6,8 @@ import './BankBranches.scss';
 export const BankBranches: FC = () => {
   const [countries, setCountries] = useState({
     russia: false,
-    sng: false,
-    europa: false,
+    cis: false,
+    europe: false,
   });
   return (
     <section className="bank-branches">
@@ -27,7 +27,7 @@ export const BankBranches: FC = () => {
           checboxLabel="СНГ"
           inputWrapper="country-picker__element"
           onCheckboxChange={(v: boolean) => {
-            setCountries({ ...countries, sng: v });
+            setCountries({ ...countries, cis: v });
           }}
         />
 
@@ -35,7 +35,7 @@ export const BankBranches: FC = () => {
           id="europa"
           checboxLabel="Европпа"
           onCheckboxChange={(v: boolean) => {
-            setCountries({ ...countries, europa: v });
+            setCountries({ ...countries, europe: v });
           }}
         />
       </div>

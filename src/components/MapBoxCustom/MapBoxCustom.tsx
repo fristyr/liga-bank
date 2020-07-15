@@ -1,32 +1,49 @@
 import React, { FC, useState, useEffect } from 'react';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
-import { cities } from './data';
+import { cities, defaultCoordinates, regions } from './data';
 import './MapBoxCustom.scss';
 
 interface Props {
   countries: {
     russia: boolean;
-    sng: boolean;
-    europa: boolean;
+    cis: boolean;
+    europe: boolean;
   };
 }
 
-export const MapBoxCustom: FC<Props> = ({ countries }) => {
-  const [viewport, setViewport] = useState({
-    latitude: 51.60609795796509,
-    longitude: 46.470268747132216,
-    zoom: 2.91984440124643,
-  });
+export const MapBoxCustom: FC<Props> = ({
+  countries: { russia, cis, europe },
+}) => {
+  const [viewport, setViewport] = useState(defaultCoordinates);
   const [selectedCity, setSelectedCity] = useState<any>(null);
 
+  const {
+    regioRussia,
+    regioCis,
+    regioEurope,
+    regioRussiaAndCis,
+    regioRussiaAndEurope,
+    regioCisAndEurope
+  } = regions;
+
   useEffect(() => {
-    if (countries.russia)
-      setViewport({
-        latitude: 55.68198844838635,
-        longitude: 56.14266938202361,
-        zoom: 3.923957425514986,
-      });
-  }, [countries]);
+    if(!russia && !cis && !europe) setViewport(defaultCoordinates);
+
+    if(russia) setViewport(regioRussia);
+
+    if(cis) setViewport(regioCis);
+
+    if(europe) setViewport(regioEurope);
+
+    if(russia && cis) setViewport(regioRussiaAndCis);
+
+    if(russia && europe) setViewport(regioRussiaAndEurope)
+
+    if(europe && cis) setViewport(regioCisAndEurope)
+
+    if(russia && cis && europe) setViewport(defaultCoordinates)
+
+  }, [russia, cis, europe]);
 
   let size = 40;
   return (
