@@ -100,7 +100,11 @@
     transform: translate(-50%, -50%);
     max-width: 550px;
     width: 100%;
-    z-index: 0;
+    z-index: 1;
+  }
+  &__prefix-input-wrap {
+    position: relative;
+    z-index: 2;
   }
   &__sign,
   &__prefix-input-wrap > input {

@@ -5,11 +5,12 @@ interface Props {
   onCheckboxChange?: (v: boolean ) => void;
   checboxLabel?: string,
   id?: string,
+  inputWrapper?: string,
 }
 
-export const Checkbox: FC<Props> = ({onCheckboxChange, checboxLabel, id}) => {
+export const Checkbox: FC<Props> = ({onCheckboxChange, checboxLabel, id, inputWrapper}) => {
   return (
-    <div>
+    <div className={inputWrapper}>
       <input
         className="filter-checkbox visually-hidden"
         type="checkbox"

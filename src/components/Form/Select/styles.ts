@@ -41,6 +41,7 @@ export  const customStyles = {
     marginTop: 0,
     textAlign: 'left',
     wordWrap: 'break-word',
+    zIndex: 3
     
   }),
   menuList: (base: Object) => ({
@@ -57,6 +58,6 @@ export  const customStyles = {
     cursor: 'pointer',
     padding: '25px',
     color: 'mainColor',
-    backgroundColor: state.isFocused ? secondayColor : 'transparent'
+    backgroundColor: state.isFocused ? secondayColor : '#fff'
   })
 };

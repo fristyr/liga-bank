@@ -9,13 +9,13 @@ import ReactSlider from 'react-slider';
 import './Calculator.scss';
 
 export const Calculator: FC = () => {
-  const [selectValue, setSelectValue] = useState(1);
+  const [selectValue, setSelectValue] = useState(null);
 
   const [priceValue, setPriceValue] = useState(2000000);
   const [initialFee, setInitialFee] = useState(0);
 
   const [percent, setPercent] = useState(
-    selectValue === 1 ? 10 : selectValue === 2 ? 20 : 0
+    selectValue === 1 ? 10 : selectValue === 2 ? 20 : 10
   );
 
   const [yaers, setYears] = useState(1);
@@ -46,6 +46,7 @@ export const Calculator: FC = () => {
   });
 
   useEffect(() => {
+    
     setPercent(selectValue === 1 ? 10 : selectValue === 2 ? 20 : 0);
     setPriceValue(2000000);
     setYears(1)

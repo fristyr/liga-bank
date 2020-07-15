@@ -30,7 +30,6 @@ export const Offers: FC = () => {
   const goToSlide = (id: Number) => {
     if (swiperRef?.current?.swiper) {
       swiperRef.current.swiper.slideTo(id);
-      console.log(swiperRef.current.swiper);
       setSlideIndex(swiperRef.current.swiper);
     }
   };
