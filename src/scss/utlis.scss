@@ -9,6 +9,27 @@ a {
   text-decoration: none;
 }
 
+button {
+  border: none;
+  background: transparent;
+}
+
+.visually-hidden:not(:focus):not(:active),
+input[type='checkbox'].visually-hidden,
+input[type='radio'].visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  -webkit-clip-path: inset(100%);
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
 .button {
   display: block;
   border: none;
@@ -25,7 +46,7 @@ a {
   cursor: pointer;
   transition: 250ms;
   border: 1px solid transparent;
-  
+
   &--small {
     width: 198px;
   }
@@ -41,4 +62,29 @@ ul {
 }
 li {
   list-style: none;
+}
+
+.horizontal-slider {
+  height: 10px;
+  &__thumb {
+    background: $accent-color;
+    border-radius: 50%;
+    width: 14px;
+    height: 14px;
+    top: -7px;
+    cursor: grab;
+  }
+  &__track {
+    height: 2px;
+    background: $seconday-color;
+    cursor: pointer;
+  }
+}
+
+.custom-input {
+  padding: 20px;
+  border: 1px solid #0a1e32;
+  border-radius: 4px;
+  background-color: transparent;
+  width: 100%;
 }

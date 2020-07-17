@@ -1,6 +1,6 @@
 import React from 'react';
 import './scss/App.scss';
-import { Header, Slider, Offers, Calculator } from './components';
+import { Header, Slider, Offers, Calculator, Footer, BankBranches  } from './components';
 
 
 function App() {
@@ -14,9 +14,10 @@ function App() {
         <section className="content-wrapper">
           <Offers />
           <Calculator />
-          
+          <BankBranches />
         </section>
       </main>
+      <Footer />
     </div>
   );
 }

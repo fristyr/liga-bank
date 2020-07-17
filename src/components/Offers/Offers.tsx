@@ -30,7 +30,6 @@ export const Offers: FC = () => {
   const goToSlide = (id: Number) => {
     if (swiperRef?.current?.swiper) {
       swiperRef.current.swiper.slideTo(id);
-      console.log(swiperRef.current.swiper);
       setSlideIndex(swiperRef.current.swiper);
     }
   };
@@ -126,7 +125,7 @@ export const Offers: FC = () => {
                       />
 
                       <img
-                        src={process.env.PUBLIC_URL + `${imgDesktopWebp}`}
+                        src={process.env.PUBLIC_URL + `${imgDesktopJpg}`}
                         alt={`slider${id}`}
                         className="offer-img"
                       />

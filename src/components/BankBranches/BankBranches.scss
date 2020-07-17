@@ -1,0 +1,25 @@
+@import '../../scss/variables.scss';
+@import '../../scss/mixins.scss';
+
+.bank-branches {
+  margin-bottom: 110px;
+  &__title {
+    font-family: 'Roboto-Bold', sans-serif;
+    font-weight: bold;
+    font-size: 41px;
+    line-height: 57px;
+    margin-bottom: 70px;
+  }
+}
+.country-picker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $seconday-color;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #C1C2CA;
+  &__element {
+    margin-right: 35px;
+  }
+}

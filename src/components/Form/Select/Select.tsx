@@ -1,20 +1,26 @@
 import React, { FC } from 'react';
 import CustomSelect from 'react-select';
 import classNames from 'classnames';
-import {customStyles} from './styles'
+import { ValueType } from 'react-select/src/types';
+import { customStyles } from './styles';
+import { dataValues } from './data';
+
 import './Select.scss';
 
-export const Select: FC = () => {
-  const Countries = [
-    { label: 'Ипотечное кредитование', value: 355 },
-    { label: 'Автомобильное кредитование', value: 54 },
-    { label: 'Потребительский кредит', value: 43 },
-  ];
+interface Props {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onSelectChanged: (value: any) => void;
+}
 
-
+export const Select: FC<Props> = ({ onSelectChanged }) => {
+  type OptionType = { label: string; value: number };
   return (
     <CustomSelect
-      options={Countries}
+      options={dataValues}
+      onChange={(selectedOption: ValueType<OptionType>) => {
+        const onChangeValue = selectedOption as OptionType;
+        onSelectChanged(onChangeValue.value);
+      }}
       isMulti={false}
       styles={customStyles}
       placeholder="Выберите цель кредита"
@@ -22,12 +28,12 @@ export const Select: FC = () => {
         IndicatorSeparator: () => null,
         DropdownIndicator: (state) => (
           <div
-            className={classNames('menu__select',{
+            className={classNames('menu__select', {
               'menu__select--open': state.selectProps.menuIsOpen,
             })}
           >
             <img
-              src={process.env.PUBLIC_URL + '/assets/chevron.svg'}
+              src={`${process.env.PUBLIC_URL}/assets/chevron.svg`}
               alt="Arrow"
             />
           </div>

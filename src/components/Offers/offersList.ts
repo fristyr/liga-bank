@@ -9,7 +9,7 @@ const offersList = [
       'Разнообразные условия',
       'Возможность ежемесячной капитализации или вывод процентов на банковскую карту',
     ],
-    
+
     buttonLink: '/test',
     imgDesktopWebp: '/assets/offers/big/offer-1.webp',
     imgDesktopJpg: '/assets/offers/big/offer-1.jpg',
@@ -47,7 +47,7 @@ const offersList = [
       'Страхование жизни и здоровья',
       'Страхование недвижимости',
     ],
-    
+
     buttonLink: '/test',
     imgDesktopWebp: '/assets/offers/big/offer-3.webp',
     imgDesktopJpg: '/assets/offers/big/offer-3.jpg',
