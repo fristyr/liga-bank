@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Input } from '../index';
+import { Input } from '../Form/Input';
 import './ApplicationRequest.scss';
 
 const data = [
@@ -30,10 +30,10 @@ export const ApplicationRequest: FC = () => {
         </div>
         <div className="grid-input">
           <Input inputPlaceholder="Телефон" inputClassName="grid-input__el" />
-          <Input inputPlaceholder="E-mail"  inputClassName="grid-input__el" />
+          <Input inputPlaceholder="E-mail" inputClassName="grid-input__el" />
         </div>
       </div>
-      <button className="button application-form__button">Отправить</button>
+      <button type="button" className="button application-form__button">Отправить</button>
     </form>
   );
 };

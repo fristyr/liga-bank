@@ -1,1 +1,1 @@
-export * from './MapBoxCustom'
+export * from './MapBoxCustom';

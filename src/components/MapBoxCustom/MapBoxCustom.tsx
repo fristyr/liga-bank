@@ -11,11 +11,19 @@ interface Props {
   };
 }
 
+interface SelectedCountry {
+  name: string;
+  latitude: number;
+  longitude: number;
+}
+
 export const MapBoxCustom: FC<Props> = ({
   countries: { russia, cis, europe },
 }) => {
   const [viewport, setViewport] = useState(defaultCoordinates);
-  const [selectedCity, setSelectedCity] = useState<any>(null);
+  const [selectedCity, setSelectedCity] = useState<SelectedCountry | null>(
+    null
+  );
 
   const {
     regioRussia,
@@ -23,32 +31,30 @@ export const MapBoxCustom: FC<Props> = ({
     regioEurope,
     regioRussiaAndCis,
     regioRussiaAndEurope,
-    regioCisAndEurope
+    regioCisAndEurope,
   } = regions;
 
   useEffect(() => {
-    if(!russia && !cis && !europe) setViewport(defaultCoordinates);
+    if (!russia && !cis && !europe) setViewport(defaultCoordinates);
 
-    if(russia) setViewport(regioRussia);
+    if (russia) setViewport(regioRussia);
 
-    if(cis) setViewport(regioCis);
+    if (cis) setViewport(regioCis);
 
-    if(europe) setViewport(regioEurope);
+    if (europe) setViewport(regioEurope);
 
-    if(russia && cis) setViewport(regioRussiaAndCis);
+    if (russia && cis) setViewport(regioRussiaAndCis);
 
-    if(russia && europe) setViewport(regioRussiaAndEurope)
+    if (russia && europe) setViewport(regioRussiaAndEurope);
 
-    if(europe && cis) setViewport(regioCisAndEurope)
+    if (europe && cis) setViewport(regioCisAndEurope);
 
-    if(russia && cis && europe) setViewport(defaultCoordinates)
-
+    if (russia && cis && europe) setViewport(defaultCoordinates);
   }, [russia, cis, europe]);
 
-  let size = 40;
+  const size = 40;
   return (
     <div>
-      {console.log(viewport)}
       <ReactMapGL
         width="100%"
         height="460px"
@@ -59,20 +65,22 @@ export const MapBoxCustom: FC<Props> = ({
       >
         {cities.map(({ coordinates }) => (
           <Marker
+            key={coordinates.name}
             latitude={coordinates.latitude}
             longitude={coordinates.longitude}
           >
-            <div
+            <button
+              type="button"
               style={{ transform: `translate(${-size / 2}px,${-size}px)` }}
-              onClick={(e) => {
+              onClick={() => {
                 setSelectedCity(coordinates);
               }}
             >
               <img
-                src={process.env.PUBLIC_URL + '/assets/location.svg'}
+                src={`${process.env.PUBLIC_URL}/assets/location.svg`}
                 alt="Location-icon"
               />
-            </div>
+            </button>
           </Marker>
         ))}
 

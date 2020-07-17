@@ -1,15 +1,16 @@
 import { COLORS } from '../../../constants/colors';
+
 const { accentColor, mainColor, secondayColor } = COLORS;
 
-export  const customStyles = {
-  container: (base: any) => ({
+export const customStyles = {
+  container: (base: object) => ({
     ...base,
     maxWidth: '600px',
     '@media only screen and (max-width: 1023px) ': {
-      maxWidth: '100%'
-    }
+      maxWidth: '100%',
+    },
   }),
-  
+
   placeholder: (base: any) => ({
     ...base,
     color: mainColor,
@@ -17,11 +18,7 @@ export  const customStyles = {
     fontSize: '16px',
     lineHeight: '22px',
   }),
-  /* dropdownIndicator: (base: any, state: any) => ({
-    ...base,
-    transition: 'all .2s ease',
-    transform: state.selectProps.menuIsOpen ? 'rotate(180deg)' : null,
-  }), */
+
   control: (base: any, state: any) => ({
     ...base,
     cursor: 'pointer',
@@ -41,8 +38,7 @@ export  const customStyles = {
     marginTop: 0,
     textAlign: 'left',
     wordWrap: 'break-word',
-    zIndex: 3
-    
+    zIndex: 3,
   }),
   menuList: (base: Object) => ({
     ...base,
@@ -58,6 +54,6 @@ export  const customStyles = {
     cursor: 'pointer',
     padding: '25px',
     color: 'mainColor',
-    backgroundColor: state.isFocused ? secondayColor : '#fff'
-  })
+    backgroundColor: state.isFocused ? secondayColor : '#fff',
+  }),
 };

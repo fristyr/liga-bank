@@ -1,10 +1,9 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { FC, useState, useEffect } from 'react';
-import { Select, Checkbox } from '../index';
 import InputNumber from 'rc-input-number';
 import ReactSlider from 'react-slider';
-//import Slider from 'rc-slider';
-
-//import 'rc-slider/assets/index.css';
+import { Select } from '../Form/Select';
+import { Checkbox } from '../Form/Checkbox';
 
 import './Calculator.scss';
 
@@ -15,7 +14,8 @@ export const Calculator: FC = () => {
   const [initialFee, setInitialFee] = useState(0);
 
   const [percent, setPercent] = useState(
-    selectValue === 1 ? 10 : selectValue === 2 ? 20 : 10
+    // selectValue === 1 ? 10 : selectValue === 2 ? 20 : 10
+    10
   );
 
   const [yaers, setYears] = useState(1);
@@ -31,7 +31,7 @@ export const Calculator: FC = () => {
   const onChange = (value: number) => {
     setPriceValue(value);
   };
-  const onChangeInitialFee = (value: any) => {
+  const onChangeInitialFee = (value: number) => {
     setInitialFee(value);
     setPercent((value / priceValue) * 100);
   };
@@ -46,10 +46,10 @@ export const Calculator: FC = () => {
   });
 
   useEffect(() => {
-    
-    setPercent(selectValue === 1 ? 10 : selectValue === 2 ? 20 : 0);
+    if (selectValue === 1) setPercent(10);
+    if (selectValue === 2) setPercent(20);
     setPriceValue(2000000);
-    setYears(1)
+    setYears(1);
   }, [selectValue]);
 
   useEffect(() => {
@@ -75,34 +75,50 @@ export const Calculator: FC = () => {
   const downHandler = (
     <div className="cost-coltroll__button">
       <img
-        src={process.env.PUBLIC_URL + '/assets/minus.svg'}
+        src={`${process.env.PUBLIC_URL}/assets/minus.svg`}
         alt="minus-cost"
       />
     </div>
   );
   const upHandler = (
     <div className="cost-coltroll__button">
-      <img src={process.env.PUBLIC_URL + '/assets/plus.svg'} alt="plus-cost" />
+      <img src={`${process.env.PUBLIC_URL}/assets/plus.svg`} alt="plus-cost" />
     </div>
   );
 
-  const minPriceValue =
+  /* const minPriceValue =
     selectValue === 1
       ? 1200000
       : selectValue === 2
       ? 500000
       : selectValue === 3
       ? 50000
-      : null;
+      : null; */
 
-  const maxPriceValue =
+  const minPriceValue = () => {
+    let v;
+    if (selectValue === 1) v = 1200000;
+    if (selectValue === 2) v = 500000;
+    if (selectValue === 3) v = 50000;
+    return v;
+  };
+
+  /* const maxPriceValue =
     selectValue === 1
       ? 25000000
       : selectValue === 2
       ? 5000000
       : selectValue === 3
       ? 3000000
-      : null;
+      : null; */
+
+  const maxPriceValue = () => {
+    let v;
+    if (selectValue === 1) v = 25000000;
+    if (selectValue === 2) v = 5000000;
+    if (selectValue === 3) v = 3000000;
+    return v;
+  };
 
   const regexReplace = /\B(?=(\d{3})+(?!\d))/g;
 
@@ -122,7 +138,17 @@ export const Calculator: FC = () => {
 
   const AP = (SK * (PS + PS / (Math.pow(1 + PS, KP) - 1))).toFixed(2);
 
-  const reqIncome = (AP as any) * 2.2;
+  // const reqIncome = (AP as any) * 2.2;
+
+  const reqIncome = Number(AP) * 2.2;
+
+  const offerDescriptionText = () => {
+    let v = '';
+    if (selectValue === 1) v = 'Сумма ипотеки';
+    if (selectValue === 2) v = 'Сумма автокредита';
+    if (selectValue === 3) v = 'Сумма кредита';
+    return v;
+  };
 
   const offerOptions = [
     {
@@ -130,14 +156,7 @@ export const Calculator: FC = () => {
       title: `${(priceValue - initialFee)
         .toString()
         .replace(regexReplace, ' ')} рублей`,
-      description:
-        selectValue === 1
-          ? 'Сумма ипотеки'
-          : selectValue === 2
-          ? 'Сумма автокредита'
-          : selectValue === 3
-          ? 'Сумма кредита'
-          : '',
+      description: offerDescriptionText(),
     },
     {
       id: 2,
@@ -170,13 +189,16 @@ export const Calculator: FC = () => {
               Шаг 2. Введите параметры кредита
             </h2>
             <p className="calculator__description">
-              {selectValue === 1
+              {/* {selectValue === 1
                 ? 'Стоимость недвижимости'
                 : selectValue === 2
                 ? 'Стоимость автомобиля'
                 : selectValue === 3
                 ? 'Сумма потребительского кредита!'
-                : ''}
+                : ''} */}
+              {selectValue === 1 && 'Стоимость недвижимости'}
+              {selectValue === 2 && 'Стоимость автомобиля'}
+              {selectValue === 3 && 'Сумма потребительского кредита!'}
             </p>
             <label className="cost-coltroll" htmlFor="cost-value">
               <div className="values">
@@ -184,15 +206,14 @@ export const Calculator: FC = () => {
                   prefixCls="values__prefix"
                   aria-label="Number input example that demonstrates custom styling"
                   value={priceValue}
-                  min={minPriceValue}
-                  max={maxPriceValue}
+                  min={minPriceValue()}
+                  max={maxPriceValue()}
                   downHandler={downHandler}
                   upHandler={upHandler}
                   onChange={onChange}
                   step={100000}
                   formatter={(value: Number) =>
-                    `${value}`.replace(regexReplace, ' ')
-                  }
+                    `${value}`.replace(regexReplace, ' ')}
                   id="cost-value"
                   pattern="[0-9]{10}"
                 />
@@ -200,47 +221,40 @@ export const Calculator: FC = () => {
               </div>
             </label>
             <span className="calculator__price-gap">
-              {selectValue === 1
-                ? 'От 1 200 000 до 25 000 000 рублей'
-                : selectValue === 2
-                ? 'От 500 000 до 5 000 000 рублей'
-                : selectValue === 3
-                ? 'От 50 000 до 3 000 000 рублей'
-                : ''}
+              {selectValue === 1 && 'От 1 200 000 до 25 000 000 рублей'}
+              {selectValue === 2 && 'От 500 000 до 5 000 000 рублей'}
+              {selectValue === 3 && 'От 50 000 до 3 000 000 рублей'}
             </span>
 
             {selectValue !== 3 && (
               <div className="initial-fee-wrapp">
                 <p className="calculator__description">Первоначальный взнос</p>
                 <label className="cost-coltroll" htmlFor="initial-fee">
-                  <div className="values">
-                    <InputNumber
-                      prefixCls="values__prefix"
-                      aria-label="Number input example that demonstrates custom styling"
-                      value={initialFee}
-                      min={initialFee}
-                      max={maxPriceValue}
-                      onChange={onChangeInitialFee}
-                      step={100000}
-                      formatter={(value: Number) =>
-                        `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
-                      }
-                      id="initial-fee"
-                      pattern="[0-9]{10}"
-                    />
-                    <span className="values__sign"> рублей </span>
-                  </div>
+                  <InputNumber
+                    prefixCls="values__prefix"
+                    aria-label="Number input example that demonstrates custom styling"
+                    value={initialFee}
+                    min={initialFee}
+                    max={maxPriceValue()}
+                    onChange={onChangeInitialFee}
+                    step={100000}
+                    formatter={(value: Number) =>
+                      `${value}`.replace(regexReplace, ' ')}
+                    id="initial-fee"
+                    pattern="[0-9]{10}"
+                  />
+                  <span className="values__sign"> рублей </span>
                 </label>
                 <ReactSlider
                   className="horizontal-slider"
                   thumbClassName="horizontal-slider__thumb"
                   trackClassName="horizontal-slider__track"
-                  renderThumb={(props) => <div {...props}></div>}
+                  renderThumb={(props) => <div {...props} />}
                   value={percent}
                   step={5}
                   min={10}
                   max={100}
-                  onChange={(value: any) => setPercent(value)}
+                  onChange={(value: unknown) => setPercent(Number(value))}
                 />
                 <span className="calculator__price-gap">
                   {Math.trunc(percent * 100) / 100} %{' '}
@@ -260,8 +274,7 @@ export const Calculator: FC = () => {
                   onChange={onYearChange}
                   step={100000}
                   formatter={(value: Number) =>
-                    `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
-                  }
+                    `${value}`.replace(regexReplace, ' ')}
                   id="loan-terms"
                   pattern="[0-9]{10}"
                 />
@@ -272,12 +285,12 @@ export const Calculator: FC = () => {
               className="horizontal-slider"
               thumbClassName="horizontal-slider__thumb"
               trackClassName="horizontal-slider__track"
-              renderThumb={(props) => <div {...props}></div>}
+              renderThumb={(props) => <div {...props} />}
               min={1}
               step={1}
               max={selectValue === 3 ? 7 : 30}
               value={yaers}
-              onChange={(value: any) => setYears(value)}
+              onChange={(value: unknown) => setYears(Number(value))}
             />
             <span className="calculator__price-gap">{yaers} лет</span>
             {selectValue === 1 && (
@@ -343,27 +356,27 @@ export const Calculator: FC = () => {
                   </div>
                 ))}
               </div>
-              <button className=" button bank-offer__button">
+              <button type="button" className=" button bank-offer__button">
                 Оформить заявку
               </button>
             </div>
-          ) : (
-            <div className="calculator__offer">
-              <div className="bank-offer bank-offer--no-offer">
-                <h2 className="bank-offer__title">
-                  Наш банк не выдаёт ипотечные кредиты меньше{' '}
-                  <span>
-                    {selectValue === 1 && '500 000'}
-                    {selectValue === 2 && '200 000'}
-                  </span>{' '}
-                  рублей
-                </h2>
-                <p className="offer-option__description">
-                  Попробуйте использовать другие параметры для расчёта.
-                </p>
+            ) : (
+              <div className="calculator__offer">
+                <div className="bank-offer bank-offer--no-offer">
+                  <h2 className="bank-offer__title">
+                    Наш банк не выдаёт ипотечные кредиты меньше{' '}
+                    <span>
+                      {selectValue === 1 && '500 000'}
+                      {selectValue === 2 && '200 000'}
+                    </span>{' '}
+                    рублей
+                  </h2>
+                  <p className="offer-option__description">
+                    Попробуйте использовать другие параметры для расчёта.
+                  </p>
+                </div>
               </div>
-            </div>
-          )}
+            )}
         </div>
       )}
     </section>

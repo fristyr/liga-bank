@@ -1,14 +1,14 @@
 import React from 'react';
-import logo from '../../assets/logo.svg';
-import Icon from '../../assets/login-icon';
-import logoModal from '../../assets/logo-modal.svg';
-import closeIcon from '../../assets/close-icon.svg';
-import burgerIcon from '../../assets/burger-logo.svg';
 import { Drawer } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Fade from '@material-ui/core/Fade';
 import TextField from '@material-ui/core/TextField';
+import logo from '../../assets/logo.svg';
+import Icon from '../../assets/login-icon';
+import logoModal from '../../assets/logo-modal.svg';
+import closeIcon from '../../assets/close-icon.svg';
+import burgerIcon from '../../assets/burger-logo.svg';
 
 import './Header.scss';
 import '../../scss/variables.scss';
@@ -53,9 +53,9 @@ export const Header: React.FC = () => {
   };
   return (
     <header className="header">
-      <div className="nav__sm-controller" onClick={burgerMenu}>
+      <button type="button" className="nav__sm-controller" onClick={burgerMenu}>
         <img src={burgerIcon} alt="burger-menu" />
-      </div>
+      </button>
 
       <img src={logo} className="header__logo" alt="header-logo" />
 
@@ -95,10 +95,10 @@ export const Header: React.FC = () => {
         </div>
       </nav>
 
-      <div className="login" onClick={loginOpen}>
+      <button type="button" className="login" onClick={loginOpen}>
         <Icon fill="#1F1E25" />
         <span className="login__text">Войти в Интернет-банк</span>
-      </div>
+      </button>
 
       <Modal
         aria-labelledby="transition-modal-title"
@@ -117,7 +117,9 @@ export const Header: React.FC = () => {
           <div className="login-paper">
             <div className="modal-nav">
               <img src={logoModal} alt="Modal-company-logo" />
-              <img src={closeIcon} alt="Close-modal-icon" onClick={loginOpen} />
+              <button type="button" onClick={loginOpen}>
+                <img src={closeIcon} alt="Close-modal-icon" />
+              </button>
             </div>
             <TextField
               id="outlined-secondary"
@@ -142,7 +144,7 @@ export const Header: React.FC = () => {
               }}
             />
             <span className="login-paper__forgot-password">Забыли пароль?</span>
-            <button className="button login-paper__button" >
+            <button type="button" className="button login-paper__button">
               Войти
             </button>
           </div>

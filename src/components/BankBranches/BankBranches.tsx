@@ -1,5 +1,6 @@
 import React, { FC, useState } from 'react';
-import { Checkbox, MapBoxCustom } from '../index';
+import { Checkbox } from '../Form/Checkbox';
+import { MapBoxCustom } from '../MapBoxCustom';
 
 import './BankBranches.scss';
 

@@ -1,14 +1,19 @@
 import React, { FC } from 'react';
-import './Checkbox.scss'
+import './Checkbox.scss';
 
 interface Props {
-  onCheckboxChange?: (v: boolean ) => void;
-  checboxLabel?: string,
-  id?: string,
-  inputWrapper?: string,
+  onCheckboxChange?: (v: boolean) => void;
+  checboxLabel?: string;
+  id?: string;
+  inputWrapper?: string;
 }
 
-export const Checkbox: FC<Props> = ({onCheckboxChange, checboxLabel, id, inputWrapper}) => {
+export const Checkbox: FC<Props> = ({
+  onCheckboxChange,
+  checboxLabel,
+  id,
+  inputWrapper,
+}) => {
   return (
     <div className={inputWrapper}>
       <input
@@ -16,8 +21,9 @@ export const Checkbox: FC<Props> = ({onCheckboxChange, checboxLabel, id, inputWr
         type="checkbox"
         name="checkbox"
         id={id}
-        onChange={e => {
-          if (onCheckboxChange !== undefined) onCheckboxChange(e.target.checked);
+        onChange={(e) => {
+          if (onCheckboxChange !== undefined)
+            onCheckboxChange(e.target.checked);
         }}
       />
       <label htmlFor={id}>

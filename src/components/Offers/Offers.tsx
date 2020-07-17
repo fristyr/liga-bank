@@ -125,7 +125,7 @@ export const Offers: FC = () => {
                       />
 
                       <img
-                        src={process.env.PUBLIC_URL + `${imgDesktopWebp}`}
+                        src={process.env.PUBLIC_URL + `${imgDesktopJpg}`}
                         alt={`slider${id}`}
                         className="offer-img"
                       />
