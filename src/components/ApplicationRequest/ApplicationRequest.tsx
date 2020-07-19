@@ -2,15 +2,36 @@ import React, { FC } from 'react';
 import { Input } from '../Form/Input';
 import './ApplicationRequest.scss';
 
-const data = [
-  { title: 'Номер заявки', description: '№ 0010', id: '1' },
-  { title: 'Цель кредита', description: 'Ипотека', id: '2' },
-  { title: 'Стоимость недвижимости', description: '2 000 000 рублей', id: '3' },
-  { title: 'Первоначальный взнос', description: '200 000 рублей', id: '4' },
-  { title: 'Срок кредитования', description: '5 лет', id: '5' },
-];
 
-export const ApplicationRequest: FC = () => {
+interface Props {
+  selectValue?: number | null;
+  priceValue?: number;
+  initialFee?: number;
+  years?: number;
+}
+
+export const ApplicationRequest: FC<Props> = ({
+  selectValue,
+  priceValue,
+  initialFee,
+  years,
+}) => {
+  const data = [
+    { title: 'Номер заявки', description: '№ 0010', id: '1' },
+    { title: 'Цель кредита', description: selectValue, id: '2' },
+    {
+      title: 'Стоимость недвижимости',
+      description: `${priceValue} рублей`,
+      id: '3',
+    },
+    {
+      title: 'Первоначальный взнос',
+      description: `${initialFee} рублей`,
+      id: '4',
+    },
+    { title: 'Срок кредитования', description: `${years} рублей`, id: '5' },
+  ];
+
   return (
     <form className="application-form">
       <h2 className="calculator__step application-form__title">
@@ -33,7 +54,9 @@ export const ApplicationRequest: FC = () => {
           <Input inputPlaceholder="E-mail" inputClassName="grid-input__el" />
         </div>
       </div>
-      <button type="button" className="button application-form__button">Отправить</button>
+      <button type="button" className="button application-form__button">
+        Отправить
+      </button>
     </form>
   );
 };

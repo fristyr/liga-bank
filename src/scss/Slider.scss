@@ -216,15 +216,13 @@
 .swiper-pagination-fraction,
 .swiper-pagination-custom,
 .swiper-container-horizontal > .swiper-pagination-bullets {
-  bottom: 36px;
-  left: 0;
   width: 100%;
-  @include bp(desktop-sm) {
+/*@include bp(desktop-sm) {
     bottom: 11px;
   }
   @include bp(tablet) {
     bottom: 5px;
-  }
+  } */
 }
 /* Bullets */
 .swiper-pagination-bullets-dynamic {

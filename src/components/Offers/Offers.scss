@@ -3,6 +3,12 @@
 
 .offers {
   margin-bottom: 94px;
+  @include bp(desktop-sm) {
+    margin-bottom: 68px;
+  }
+  @include bp(tablet) {
+    margin-bottom: 54px;
+  }
 }
 
 .offers-nav {
@@ -47,9 +53,17 @@
   @include bp(desktop-sm) {
     margin-left: 45px;
     padding-top: 54px;
+    padding-bottom: 34px;
+    
   }
   @include bp(tablet) {
     margin-left: 15px;
+    padding-bottom: 56px;
+  }
+  &--2 {
+    @include bp(desktop-sm) {
+      padding-bottom: 59px;
+    }
   }
   &__wrapper-img {
     @include bp(tablet) {
@@ -86,12 +100,12 @@
     margin-right: 186px;
 
     @include bp(desktop-sm) {
-      margin-right: 0;
+      margin-right: 50px;
     }
   }
   &--2 {
     @include bp(desktop-sm) {
-      margin-right: 109px;
+      margin-right: 90px;
     }
     @include bp(tablet) {
       margin-right: 0;
@@ -100,7 +114,7 @@
   &--3 {
     margin-right: 120px;
     @include bp(desktop-sm) {
-      margin-right: 29px;
+      margin-right: 38px;
     }
     @include bp(tablet) {
       margin-right: 0;
@@ -123,8 +137,8 @@
     }
     &--3 {
       max-width: 360px;
-      @include bp(tablet) {
-        max-width: 220px;
+      @include bp(desktop-sm) {
+        max-width: 350px;
       }
     }
   }
@@ -173,6 +187,10 @@
     &--2 {
       max-width: 340px;
       margin-right: 186px;
+      @include bp(desktop-sm) {
+        margin-right: 0;
+        max-width: 300px;
+      }
     }
     &--3 {
       max-width: 406px;
@@ -240,5 +258,18 @@
   display: none;
   @include bp(desktop-sm) {
     display: block;
+    bottom: 13px;
+  }
+  @include bp(desktop-sm) {
+    bottom: 5px;
+  }
+  & .swiper-pagination-bullet {
+    @include bp(desktop-sm) {
+      width: 5px;
+      height: 5px;
+    }
+  }
+  & .swiper-pagination-bullet-active {
+    background: #E0E0E0;
   }
 }

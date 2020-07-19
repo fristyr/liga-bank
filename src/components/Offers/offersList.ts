@@ -10,7 +10,7 @@ const offersList = [
       'Возможность ежемесячной капитализации или вывод процентов на банковскую карту',
     ],
 
-    buttonLink: '/test',
+    buttonLink: '#calculator',
     imgDesktopWebp: '/assets/offers/big/offer-1.webp',
     imgDesktopJpg: '/assets/offers/big/offer-1.jpg',
     imgTabletWebp: '/assets/offers/middle/offer-1.webp',
@@ -29,7 +29,7 @@ const offersList = [
       'Потребительский кредит',
     ],
     __html:
-      'Рассчитайте ежемесячный платеж <br /> и ставку по кредиту воспользовавшись нашим <a href="/test" >кредитным калькулятором</a> ',
+      'Рассчитайте ежемесячный платеж <br /> и ставку по кредиту воспользовавшись нашим <a href="#calculator" >кредитным калькулятором</a> ',
     imgDesktopWebp: '/assets/offers/big/offer-2.webp',
     imgDesktopJpg: '/assets/offers/big/offer-2.jpg',
     imgTabletWebp: '/assets/offers/middle/offer-2.webp',
@@ -48,7 +48,7 @@ const offersList = [
       'Страхование недвижимости',
     ],
 
-    buttonLink: '/test',
+    buttonLink: '#calculator',
     imgDesktopWebp: '/assets/offers/big/offer-3.webp',
     imgDesktopJpg: '/assets/offers/big/offer-3.jpg',
     imgTabletWebp: '/assets/offers/middle/offer-3.webp',
@@ -66,7 +66,7 @@ const offersList = [
       'Мобильный банк,<br />который всегда под рукой',
       'Приложение Лига-проездной позволит вам оплачивать билеты по всему миру',
     ],
-    buttonLink: '/test',
+    buttonLink: '#calculator',
     imgDesktopWebp: '/assets/offers/big/offer-4.webp',
     imgDesktopJpg: '/assets/offers/big/offer-4.jpg',
     imgTabletWebp: '/assets/offers/middle/offer-4.webp',

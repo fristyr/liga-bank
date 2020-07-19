@@ -1,0 +1,12 @@
+.map-controls {
+  position: absolute;
+  right: 0;
+  top: 50%;
+    transform: translate(-40%, -25%);
+}
+
+.map-controls .mapboxgl-canvas-container.mapboxgl-interactive,
+.mapboxgl-ctrl-group button.mapboxgl-ctrl-compass {
+  
+
+}

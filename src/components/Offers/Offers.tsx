@@ -1,8 +1,11 @@
-import React, { FC, useRef, useState, useEffect } from 'react';
+/* eslint-disable react/no-danger */
+import React, { FC, useRef, useState, useEffect, KeyboardEvent } from 'react';
 import Swiper, { SwiperRefNode } from 'react-id-swiper';
 
-import offersList from './offersList';
 import classNames from 'classnames';
+import offersList from './offersList';
+
+import { publicSrc } from '../../constants/publicSource';
 import './Offers.scss';
 
 export const Offers: FC = () => {
@@ -39,19 +42,29 @@ export const Offers: FC = () => {
   }, [slideIndex]);
 
   return (
-    <section className="offers">
+    <section className="offers" id="offers">
       <div className="offers-nav">
         {offersList.map((item, index) => (
           <button
+            type="button"
             key={item.id}
+            tabIndex={item.id}
             onClick={() => goToSlide(item.id)}
+            onKeyDown={(event) => {
+              if (swiperRef?.current?.swiper) {
+                if (event.key === 'Tab') {
+                  swiperRef.current.swiper.slideTo(item.id);
+                  setSlideIndex(swiperRef.current.swiper);
+                }
+              }
+            }}
             className={classNames('button offers-nav__button', {
               'offers-nav__button--active': slideIndex === index,
             })}
           >
             <img
               className="offers-nav__product-icon"
-              src={process.env.PUBLIC_URL + `${item.itemButtonIcon}`}
+              src={`${publicSrc}${item.itemButtonIcon}`}
               alt="tab-icon"
             />
             {item.itemButton}
@@ -75,57 +88,81 @@ export const Offers: FC = () => {
               imgMobileJpg,
             }) => (
               <article key={id}>
-                <div className="offer">
+                <div className={`offer offer--${id}`}>
                   <div className={`description description--${id}`}>
-                    <h2 className={`description__title description__title--${id}`}>{title}</h2>
-                    <ul className={`description__list description__list--${id}`}>
+                    <h2
+                      className={`description__title description__title--${id}`}
+                    >
+                      {title}
+                    </h2>
+                    <ul
+                      className={`description__list description__list--${id}`}
+                    >
                       {descriptionList.map((item, index) => (
-                        <li key={index} className="description__text" >
-                          <img className="description__icon" src={process.env.PUBLIC_URL + '/assets/checkmark.svg' } alt="checkmark"/>
-                          <span dangerouslySetInnerHTML={{ __html: `${item}` }} ></span>
+                        <li key={index} className="description__text">
+                          <img
+                            className="description__icon"
+                            src={`${publicSrc}/assets/checkmark.svg`}
+                            alt="checkmark"
+                          />
+                          <span
+                            dangerouslySetInnerHTML={{ __html: `${item}` }}
+                          />
                         </li>
                       ))}
                     </ul>
-                    {buttonLink && <a href={buttonLink} className="button description__button" >Узнать подробнее</a>}
-                    {__html && <p className="description__aditional" dangerouslySetInnerHTML={{__html}} ></p>}
+                    {buttonLink && (
+                      <a
+                        href={buttonLink}
+                        className="button description__button"
+                      >
+                        Узнать подробнее
+                      </a>
+                    )}
+                    {__html && (
+                      <p
+                        className="description__aditional"
+                        dangerouslySetInnerHTML={{ __html }}
+                      />
+                    )}
                   </div>
                   <div className="offer__wrapper-img ">
                     <picture>
                       <source
                         media="(min-width: 1024px)"
                         type="image/webp"
-                        srcSet={process.env.PUBLIC_URL + `${imgDesktopWebp}`}
+                        srcSet={`${publicSrc}${imgDesktopWebp}`}
                       />
                       <source
                         media="(min-width: 1024px)"
                         type="image/jpg"
-                        srcSet={process.env.PUBLIC_URL + `${imgDesktopJpg}`}
+                        srcSet={`${publicSrc}${imgDesktopJpg}`}
                       />
 
                       <source
                         media="(min-width: 768px)"
                         type="image/webp"
-                        srcSet={process.env.PUBLIC_URL + `${imgTabletWebp}`}
+                        srcSet={`${publicSrc}${imgTabletWebp}`}
                       />
                       <source
                         media="(min-width: 768px)"
                         type="image/jpg"
-                        srcSet={process.env.PUBLIC_URL + `${imgTabletJpg}`}
+                        srcSet={`${publicSrc}${imgTabletJpg}`}
                       />
 
                       <source
                         media="(min-width: 100px)"
                         type="image/webp"
-                        srcSet={process.env.PUBLIC_URL + `${imgMobileWebp}`}
+                        srcSet={`${publicSrc}${imgMobileWebp}`}
                       />
                       <source
                         media="(min-width: 100px)"
                         type="image/jpg"
-                        srcSet={process.env.PUBLIC_URL + `${imgMobileJpg}`}
+                        srcSet={`${publicSrc}${imgMobileJpg}`}
                       />
 
                       <img
-                        src={process.env.PUBLIC_URL + `${imgDesktopJpg}`}
+                        src={`${publicSrc}${imgDesktopJpg}`}
                         alt={`slider${id}`}
                         className="offer-img"
                       />

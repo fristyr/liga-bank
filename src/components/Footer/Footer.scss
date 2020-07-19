@@ -15,12 +15,13 @@
 
   @include bp(desktop-sm) {
     padding-left: 44px;
-    flex-direction: column;
+    flex-direction: row;
   }
 
   @include bp(tablet) {
     padding-left: 12px;
     padding-top: 32px;
+    flex-direction: column;
   }
   &__left {
     display: flex;

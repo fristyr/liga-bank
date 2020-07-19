@@ -4,4 +4,4 @@ export const COLORS = {
   accentColor: '#2C36F2',
   accentAditionColor: '#2028B6',
   helperColor: '#707c87',
-}
+};

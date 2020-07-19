@@ -1,6 +1,9 @@
 import React, { FC, useState, useEffect } from 'react';
-import ReactMapGL, { Marker, Popup } from 'react-map-gl';
+import ReactMapGL, { Marker, Popup, NavigationControl } from 'react-map-gl';
 import { cities, defaultCoordinates, regions } from './data';
+import useWindowSize from '../../utlis/useWindowSize';
+import { publicSrc } from '../../constants/publicSource';
+
 import './MapBoxCustom.scss';
 
 interface Props {
@@ -24,6 +27,8 @@ export const MapBoxCustom: FC<Props> = ({
   const [selectedCity, setSelectedCity] = useState<SelectedCountry | null>(
     null
   );
+
+  const { width } = useWindowSize();
 
   const {
     regioRussia,
@@ -57,12 +62,17 @@ export const MapBoxCustom: FC<Props> = ({
     <div>
       <ReactMapGL
         width="100%"
-        height="460px"
+        height={width <= 767 ? '381px' : '460px'}
         mapStyle="mapbox://styles/fristyr/ckclpx3ha0w2f1imowm8uiduk"
         mapboxApiAccessToken="pk.eyJ1IjoiZnJpc3R5ciIsImEiOiJja2Nna3J4eDQwNDllMnBvM3FzZTljOTZ1In0.U22CKeBPhN6XP3pLR3h9OQ"
         {...viewport}
         onViewportChange={(nextViewport) => setViewport(nextViewport)}
       >
+        <div className="map-controls">
+          <NavigationControl
+            onViewportChange={(nextViewport) => setViewport(nextViewport)}
+          />
+        </div>
         {cities.map(({ coordinates }) => (
           <Marker
             key={coordinates.name}
@@ -77,7 +87,7 @@ export const MapBoxCustom: FC<Props> = ({
               }}
             >
               <img
-                src={`${process.env.PUBLIC_URL}/assets/location.svg`}
+                src={`${publicSrc}/assets/location.svg`}
                 alt="Location-icon"
               />
             </button>

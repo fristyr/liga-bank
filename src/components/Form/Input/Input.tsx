@@ -6,6 +6,7 @@ interface Props {
   inputId?: string;
   inputPlaceholder?: string;
   inputClassName?: string;
+  onInputChange?: (e: string) => void;  
 }
 
 export const Input: FC<Props> = ({
@@ -13,6 +14,7 @@ export const Input: FC<Props> = ({
   inputId,
   inputPlaceholder,
   inputClassName,
+  onInputChange,
 }) => {
   return (
     <input
@@ -22,6 +24,9 @@ export const Input: FC<Props> = ({
       placeholder={inputPlaceholder}
       type={inputType}
       id={inputId}
+      onChange={(e) => {
+        if (onInputChange !== undefined) onInputChange(e.target.value);
+      }}
     />
   );
 };

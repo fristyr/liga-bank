@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { ValueType } from 'react-select/src/types';
 import { customStyles } from './styles';
 import { dataValues } from './data';
+import { publicSrc } from '../../../constants/publicSource';
 
 import './Select.scss';
 
@@ -32,10 +33,7 @@ export const Select: FC<Props> = ({ onSelectChanged }) => {
               'menu__select--open': state.selectProps.menuIsOpen,
             })}
           >
-            <img
-              src={`${process.env.PUBLIC_URL}/assets/chevron.svg`}
-              alt="Arrow"
-            />
+            <img src={`${publicSrc}/assets/chevron.svg`} alt="Arrow" />
           </div>
         ),
       }}
