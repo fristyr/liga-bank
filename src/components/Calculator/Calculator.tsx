@@ -46,7 +46,7 @@ export const Calculator: FC = () => {
     if (selectValue === 1) {
       percent <= 15 ? setPsValue(9.4) : setPsValue(8.5);
     }
-  }, [percent]);
+  }, [selectValue, percent]);
 
   useEffect(() => {
     if (selectValue === 1) setPercent(10);
@@ -140,9 +140,19 @@ export const Calculator: FC = () => {
   };
 
   const psValueText = () => {
-    if (selectValue === 1) {
-      return percent <= 15 ? '9.40 %' : '8.50 %';
+    let percentVal;
+    if (selectValue === 1 && percent <= 15) {
+      percentVal = '9.4 %';
+    } else {
+      percentVal = '8.5 %';
     }
+    if (selectValue === 2) {
+      percentVal = `${psValue} %`;
+    }
+    if (selectValue === 3) {
+      percentVal = `${psValue} %`;
+    }
+    return percentVal;
   };
 
   const offerOptions = [
@@ -186,6 +196,7 @@ export const Calculator: FC = () => {
 
   return (
     <section className="calculator" id="calculator">
+      {console.log(psValue)}
       <div className="calculator__options">
         <h2 className="calculator__title">Кредитный калькулятор</h2>
         <p className="calculator__step">Шаг 1. Цель кредита</p>
