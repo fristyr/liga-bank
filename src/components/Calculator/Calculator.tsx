@@ -77,7 +77,10 @@ export const Calculator: FC = () => {
 
   useEffect(() => {
     setFinalSum(priceValue - initialFee);
-  }, [priceValue, initialFee]);
+    maternityCapital
+      ? setFinalSum((prevVall) => prevVall - 470000)
+      : setFinalSum((prevVall) => prevVall);
+  }, [maternityCapital, priceValue, initialFee]);
 
   const downHandler = (
     <div className="cost-coltroll__button">
@@ -265,7 +268,9 @@ export const Calculator: FC = () => {
               </div>
             )}
 
-            <p className="calculator__description calculator__description--term">Срок кредитования</p>
+            <p className="calculator__description calculator__description--term">
+              Срок кредитования
+            </p>
             <label
               className="cost-coltroll cost-coltroll--term"
               htmlFor="loan-terms"
@@ -309,10 +314,6 @@ export const Calculator: FC = () => {
                 id="maternity-capital"
                 onCheckboxChange={(v: boolean) => {
                   setmMternityCapital(v);
-
-                  v
-                    ? setFinalSum((prevVall) => prevVall - 470000)
-                    : setFinalSum((prevVall) => prevVall + 470000);
                 }}
               />
             )}
