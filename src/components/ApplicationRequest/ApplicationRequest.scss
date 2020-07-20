@@ -132,6 +132,10 @@
   padding-top: 52px;
   padding-bottom: 54px;
   border-radius: 4px;
+  @include bp(tablet)  {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
   &__button {
     position: absolute;
     right: 18px;
