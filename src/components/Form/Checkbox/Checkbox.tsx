@@ -26,7 +26,7 @@ export const Checkbox: FC<Props> = ({
             onCheckboxChange(e.target.checked);
         }}
       />
-      <label htmlFor={id}>
+      <label className="filter-checbox__label" htmlFor={id}>
         <span>{checboxLabel}</span>
       </label>
     </div>

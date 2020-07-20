@@ -3,23 +3,70 @@
 
 .bank-branches {
   margin-bottom: 110px;
+  @include bp(desktop-sm) {
+    padding-left: 45px;
+    padding-right: 45px;
+    margin-bottom: 84px;
+  }
+  @include bp(tablet) {
+    padding-left: 0;
+    padding-right: 0;
+    margin-bottom: 59px;
+  }
   &__title {
     font-family: 'Roboto-Bold', sans-serif;
     font-weight: bold;
     font-size: 41px;
     line-height: 57px;
-    margin-bottom: 70px;
+    margin-bottom: 55px;
+    @include bp(desktop-sm) {
+      font-size: 32px;
+      margin-bottom: 27px;
+    }
+    @include bp(tablet) {
+      font-size: 22px;
+      line-height: 31px;
+      padding-left: 15px;
+      padding-right: 15px;
+      margin-bottom: 26px;
+    }
+  }
+}
+.countries {
+  background-color: $seconday-color;
+  padding-top: 34px;
+  padding-bottom: 27px;
+  border-bottom: 1px solid #c1c2ca;
+  @include bp(desktop-sm) {
+    padding-top: 31px;
+    padding-bottom: 30px;
+  }
+  @include bp(tablet) {
+    padding-top: 19px;
+    padding-bottom: 17px;
   }
 }
 .country-picker {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: $seconday-color;
-  padding-top: 30px;
-  padding-bottom: 30px;
-  border-bottom: 1px solid #C1C2CA;
+  margin: 0 auto;
+  max-width: 272px;
+  padding-left: 9px;
+  @include bp(tablet) {
+    padding-left: 30px;
+  }
   &__element {
-    margin-right: 35px;
+    display: inline-block;
+
+    & > .filter-checbox__label {
+      font-size: 14px;
+      line-height: 20px;
+      padding-left: 27px;
+    }
+  }
+}
+
+.picker-element {
+  margin-right: 30px;
+  @include bp(tablet) {
+    margin-right: 20px;
   }
 }

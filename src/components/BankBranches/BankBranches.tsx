@@ -11,34 +11,37 @@ export const BankBranches: FC = () => {
     europe: false,
   });
   return (
-    <section className="bank-branches">
+    <section className="bank-branches" id="bank-branches">
       <h2 className="bank-branches__title">Отделения Лига Банка</h2>
-      <div className="country-picker">
-        <Checkbox
-          id="russia"
-          checboxLabel="Россия"
-          inputWrapper="country-picker__element"
-          onCheckboxChange={(v: boolean) => {
-            setCountries({ ...countries, russia: v });
-          }}
-        />
+      <div className="countries">
+        <div className="country-picker">
+          <Checkbox
+            id="russia"
+            checboxLabel="Россия"
+            inputWrapper="country-picker__element picker-element"
+            onCheckboxChange={(v: boolean) => {
+              setCountries({ ...countries, russia: v });
+            }}
+          />
 
-        <Checkbox
-          id="sng"
-          checboxLabel="СНГ"
-          inputWrapper="country-picker__element"
-          onCheckboxChange={(v: boolean) => {
-            setCountries({ ...countries, cis: v });
-          }}
-        />
+          <Checkbox
+            id="sng"
+            checboxLabel="СНГ"
+            inputWrapper="country-picker__element picker-element"
+            onCheckboxChange={(v: boolean) => {
+              setCountries({ ...countries, cis: v });
+            }}
+          />
 
-        <Checkbox
-          id="europa"
-          checboxLabel="Европпа"
-          onCheckboxChange={(v: boolean) => {
-            setCountries({ ...countries, europe: v });
-          }}
-        />
+          <Checkbox
+            id="europa"
+            checboxLabel="Европа"
+            inputWrapper="country-picker__element "
+            onCheckboxChange={(v: boolean) => {
+              setCountries({ ...countries, europe: v });
+            }}
+          />
+        </div>
       </div>
       <MapBoxCustom countries={countries} />
     </section>

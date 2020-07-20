@@ -1,48 +1,26 @@
-import React from 'react';
+import React, { useState, FormEvent } from 'react';
 import { Drawer } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Fade from '@material-ui/core/Fade';
-import TextField from '@material-ui/core/TextField';
 import logo from '../../assets/logo.svg';
 import Icon from '../../assets/login-icon';
 import logoModal from '../../assets/logo-modal.svg';
 import closeIcon from '../../assets/close-icon.svg';
 import burgerIcon from '../../assets/burger-logo.svg';
+import { Input } from '../Form/Input';
+import { publicSrc } from '../../constants/publicSource';
 
 import './Header.scss';
 import '../../scss/variables.scss';
 
-const useStyles = makeStyles({
-  paper: {
-    width: '60%',
-    display: 'flex',
-    justifyContent: 'space-around',
-  },
-  floatingLabelFocusStyle: {
-    transform: 'translate(0, -20px) scale(1)',
-    color: '#394959',
-    fontSize: '16px',
-    fontFamily: 'Roboto-Regular',
-    fontWeight: 'normal',
-  },
-  root: {
-    '& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
-      transition: '250ms',
-      borderColor: '#1F1E25',
-    },
-
-    '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
-      borderColor: '#2C36F2',
-    },
-  },
-});
-
 export const Header: React.FC = () => {
-  const [burgerVisibility, setBurgerVisibility] = React.useState(false);
-  const [loginVisibility, setLoginVisibility] = React.useState(false);
-
-  const styles = useStyles();
+  const [burgerVisibility, setBurgerVisibility] = useState(false);
+  const [loginVisibility, setLoginVisibility] = useState(false);
+  const [credentials, setCredentials] = useState({
+    username: '',
+    password: '',
+    typePassword: true,
+  });
 
   const burgerMenu = () => {
     setBurgerVisibility(!burgerVisibility);
@@ -51,6 +29,16 @@ export const Header: React.FC = () => {
   const loginOpen = () => {
     setLoginVisibility(!loginVisibility);
   };
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    const { username, password } = credentials;
+    localStorage.setItem(
+      'User-login-data',
+      JSON.stringify({ username, password })
+    );
+  };
+
   return (
     <header className="header">
       <button type="button" className="nav__sm-controller" onClick={burgerMenu}>
@@ -60,36 +48,32 @@ export const Header: React.FC = () => {
       <img src={logo} className="header__logo" alt="header-logo" />
 
       <nav className="nav">
-        <Drawer
-          open={burgerVisibility}
-          classes={{ paper: styles.paper }}
-          onClose={burgerMenu}
-        >
-          <a href="/test" className="nav__link">
+        <Drawer open={burgerVisibility} onClose={burgerMenu}>
+          <a href="#offers" className="nav__link">
             Услуги
           </a>
-          <a href="/test" className="nav__link">
+          <a href="#calculator" className="nav__link">
             Рассчитать кредит
           </a>
-          <a href="/test" className="nav__link">
+          <a href="#bank-branches" className="nav__link">
             Контакты
           </a>
-          <a href="/test" className="nav__link">
+          <a href="#footer" className="nav__link">
             Задать вопрос
           </a>
         </Drawer>
 
         <div className="nav__lg">
-          <a href="/test" className="nav__link">
+          <a href="#offers" className="nav__link">
             Услуги
           </a>
-          <a href="/test" className="nav__link">
+          <a href="#calculator" className="nav__link">
             Рассчитать кредит
           </a>
-          <a href="/test" className="nav__link">
+          <a href="#bank-branches" className="nav__link">
             Контакты
           </a>
-          <a href="/test" className="nav__link">
+          <a href="#footer" className="nav__link">
             Задать вопрос
           </a>
         </div>
@@ -114,40 +98,57 @@ export const Header: React.FC = () => {
         }}
       >
         <Fade in={loginVisibility}>
-          <div className="login-paper">
-            <div className="modal-nav">
-              <img src={logoModal} alt="Modal-company-logo" />
-              <button type="button" onClick={loginOpen}>
-                <img src={closeIcon} alt="Close-modal-icon" />
+          <form onSubmit={handleSubmit}>
+            <div className="login-paper">
+              <div className="modal-nav">
+                <img src={logoModal} alt="Modal-company-logo" />
+                <button type="button" onClick={loginOpen}>
+                  <img src={closeIcon} alt="Close-modal-icon" />
+                </button>
+              </div>
+              <div className="login-input">
+                <span className="login-input__name">Логин</span>
+                <Input
+                  inputClassName="login-input__element-1"
+                  autoFocus={true}
+                  onInputChange={(e: string) => {
+                    setCredentials({ ...credentials, username: e });
+                  }}
+                />
+              </div>
+              <div className="login-input">
+                <span className="login-input__name">Пароль</span>
+                <Input
+                  inputClassName="login-input__element-2"
+                  inputType={credentials.typePassword ? 'password' : 'text'}
+                  onInputChange={(e: string) => {
+                    setCredentials({ ...credentials, password: e });
+                  }}
+                />
+                <button
+                  type="button"
+                  className="login-input__icon"
+                  onClick={() => {
+                    setCredentials({
+                      ...credentials,
+                      typePassword: !credentials.typePassword,
+                    });
+                  }}
+                >
+                  <img
+                    src={`${publicSrc}/assets/password-icon.svg`}
+                    alt="Password-icon"
+                  />
+                </button>
+              </div>
+              <span className="login-paper__forgot-password">
+                Забыли пароль?
+              </span>
+              <button type="submit" className="button login-paper__button">
+                Войти
               </button>
             </div>
-            <TextField
-              id="outlined-secondary"
-              label="Логин"
-              variant="outlined"
-              fullWidth
-              style={{ marginBottom: 50 }}
-              className={styles.root}
-              InputLabelProps={{
-                className: styles.floatingLabelFocusStyle,
-              }}
-            />
-            <TextField
-              id="outlined-secondary"
-              label="Пароль"
-              variant="outlined"
-              fullWidth
-              className={styles.root}
-              style={{ marginBottom: 10 }}
-              InputLabelProps={{
-                className: styles.floatingLabelFocusStyle,
-              }}
-            />
-            <span className="login-paper__forgot-password">Забыли пароль?</span>
-            <button type="button" className="button login-paper__button">
-              Войти
-            </button>
-          </div>
+          </form>
         </Fade>
       </Modal>
     </header>

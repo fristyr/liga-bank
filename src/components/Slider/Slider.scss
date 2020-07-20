@@ -148,3 +148,19 @@
     }
   }
 }
+
+.swiper-main-slides {
+  bottom: 37px;
+  @include bp(desktop-sm) {
+    bottom: 11px;
+  }
+  @include bp(tablet) {
+    bottom: 5px;
+  }
+  & .swiper-pagination-bullet-active {
+    background: $seconday-color;
+  }
+  & .swiper-pagination-bullet-active[aria-label="Go to slide 3"] {
+    background: #E0E0E0;
+  }
+}

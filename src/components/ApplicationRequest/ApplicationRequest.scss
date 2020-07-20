@@ -3,9 +3,21 @@
 
 .application-form {
   padding: 70px;
-  background-color: $seconday-color;
+  padding-top: 63px;
+  background-color: #f6f7ff;
   max-width: 630px;
+  width: 100%;
   margin: 0 auto;
+  margin-top: 61px;
+  @include bp(desktop-sm) {
+    max-width: 678px;
+    background: transparent;
+    padding: 0;
+    margin-top: 55px;
+  }
+  @include bp(tablet) {
+    margin-top: 43px;
+  }
   &__title {
     text-align: center;
     margin-bottom: 42px;
@@ -13,32 +25,75 @@
   &__button {
     margin: 0 auto;
     padding: 20px 58px 20px 58px;
+    @include bp(desktop-sm) {
+      width: 100%;
+      font-size: 16px;
+      line-height: 19px;
+      padding: 15px 50px 16px 57px;
+    }
   }
 }
 
 .req-block {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+  @include bp(desktop-sm) {
+    margin-bottom: 39px;
+  }
 }
 
 .req-item {
+  position: relative;
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  padding-top: 20px;
+  padding-top: 4px;
   padding-bottom: 20px;
-  border-bottom: 1px solid #c4c4c4;
+  @include bp(desktop-sm) {
+    padding-top: 21px;
+    padding-bottom: 3px;
+  }
+  @include bp(tablet) {
+    flex-direction: column;
+    align-items: start;
+    padding-top: 23px;
+    padding-bottom: 6px;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 10px;
+    height: 1px;
+    width: 100%;
+    background: #c4c4c4;
+    @include bp(desktop-sm) {
+      bottom: -9px;
+    }
+  }
   &__title {
     font-size: 16px;
     line-height: 22px;
     color: $helper-dark-color;
+    @include bp(tablet) {
+      order: 2;
+    }
   }
   &__description {
     font-size: 22px;
     line-height: 31px;
     font-weight: bold;
+    @include bp(tablet) {
+      font-size: 18px;
+      line-height: 25px;
+    }
   }
 }
 
 .req-inputs {
+  @include bp(desktop-sm) {
+    padding-bottom: 10px;
+  }
   &__el {
     max-width: 588px;
   }
@@ -48,7 +103,53 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 30px;
+  @include bp(desktop-sm) {
+    margin-bottom: 30px;
+  }
+  @include bp(tablet) {
+    flex-wrap: wrap;
+    margin-bottom: 17px;
+  }
   &__el {
     max-width: 258px;
+    @include bp(desktop-sm) {
+      max-width: 282px;
+    }
+    &--phone {
+      @include bp(tablet)  {
+        margin-bottom: 23px;
+      }
+    }
+  }
+}
+
+.confirmation-modal {
+  position: relative;
+  max-width: 441px;
+  width: 100%;
+  background-color: $seconday-color;
+  padding: 30px;
+  padding-top: 52px;
+  padding-bottom: 54px;
+  border-radius: 4px;
+  &__button {
+    position: absolute;
+    right: 18px;
+    top: 23px;
+  }
+  &__title {
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 31px;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+  &__text {
+    font-size: 16px;
+    line-height: 22px;
+    color: $helper-dark-color;
+    text-align: center;
+    max-width: 293px;
+    margin: 0 auto;
   }
 }

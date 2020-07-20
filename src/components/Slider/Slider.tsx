@@ -2,17 +2,18 @@ import React from 'react';
 import Swiper from 'react-id-swiper';
 import './Slider.scss';
 import images from './images';
+import { publicSrc } from '../../constants/publicSource';
 
 export const Slider: React.FC = () => {
   const params = {
     centeredSlides: true,
-    /* loop: true, */
-    /*     autoplay: {
-      delay: 2500,
+    loop: true,
+    autoplay: {
+      delay: 4000,
       disableOnInteraction: false,
-    }, */
+    },
     pagination: {
-      el: '.swiper-pagination',
+      el: '.swiper-pagination.swiper-main-slides',
       clickable: true,
     },
   };
@@ -53,38 +54,38 @@ export const Slider: React.FC = () => {
               <source
                 media="(min-width: 1024px)"
                 type="image/webp"
-                srcSet={`${process.env.PUBLIC_URL}${imgDesktopWebp}`}
+                srcSet={`${publicSrc}${imgDesktopWebp}`}
               />
               <source
                 media="(min-width: 1024px)"
                 type="image/jpg"
-                srcSet={`${process.env.PUBLIC_URL}${imgDesktopJpg}`}
+                srcSet={`${publicSrc}${imgDesktopJpg}`}
               />
 
               <source
                 media="(min-width: 768px)"
                 type="image/webp"
-                srcSet={`${process.env.PUBLIC_URL}${imgTabletWebp}`}
+                srcSet={`${publicSrc}${imgTabletWebp}`}
               />
               <source
                 media="(min-width: 768px)"
                 type="image/jpg"
-                srcSet={`${process.env.PUBLIC_URL}${imgTabletJpg}`}
+                srcSet={`${publicSrc}${imgTabletJpg}`}
               />
 
               <source
                 media="(min-width: 100px)"
                 type="image/webp"
-                srcSet={`${process.env.PUBLIC_URL}${imgMobileWebp}`}
+                srcSet={`${publicSrc}${imgMobileWebp}`}
               />
               <source
                 media="(min-width: 100px)"
                 type="image/jpg"
-                srcSet={`${process.env.PUBLIC_URL}${imgMobileJpg}`}
+                srcSet={`${publicSrc}${imgMobileJpg}`}
               />
 
               <img
-                src={`${process.env.PUBLIC_URL}${imgDesktopJpg}`}
+                src={`${publicSrc}${imgDesktopJpg}`}
                 alt={`slider${id}`}
                 className="slider__item--img"
               />

@@ -4,7 +4,15 @@
 
 .menu__select {
   transition: all .2s ease;
+  margin-right: 8px;
+  @include bp(desktop-sm) {
+    margin-right: 8px;
+  }
+  @include bp(tablet) {
+    margin-right: -2px;
+  }
   &--open {
     transform: rotate(180deg);
+    margin-right: 8px;
   }
 }

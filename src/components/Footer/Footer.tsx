@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
 import logo from '../../assets/logo.svg';
 import './Footer.scss';
+import { publicSrc } from '../../constants/publicSource';
 
 export const Footer: FC = () => {
   return (
-    <footer className="footer">
+    <footer className="footer" id="footer">
       <div className="footer__left">
         <div className="location">
           <img src={logo} alt="Logo-icon" className="location__company-logo" />
@@ -38,7 +39,7 @@ export const Footer: FC = () => {
         <div className="phone phone--mobile">
           <p className="phone__numb">
             <img
-              src={`${process.env.PUBLIC_URL}/assets/footer/phone.svg`}
+              src={`${publicSrc}/assets/footer/phone.svg`}
               alt="Phone-numb-icon"
             />
             *0904
@@ -51,7 +52,7 @@ export const Footer: FC = () => {
         <div className="phone phone--fix">
           <p className="phone__numb">
             <img
-              src={`${process.env.PUBLIC_URL}/assets/footer/fix-phone.svg`}
+              src={`${publicSrc}/assets/footer/fix-phone.svg`}
               alt="Phone-numb-icon"
             />
             8 800 111 22 33
@@ -62,22 +63,22 @@ export const Footer: FC = () => {
         <div className="socials">
           <img
             className="socials__icon"
-            src={`${process.env.PUBLIC_URL}/assets/footer/fb-icon.svg`}
+            src={`${publicSrc}/assets/footer/fb-icon.svg`}
             alt="fb"
           />
           <img
             className="socials__icon"
-            src={`${process.env.PUBLIC_URL}/assets/footer/insta.svg`}
+            src={`${publicSrc}/assets/footer/insta.svg`}
             alt="inst"
           />
           <img
             className="socials__icon"
-            src={`${process.env.PUBLIC_URL}/assets/footer/twitt.svg`}
+            src={`${publicSrc}/assets/footer/twitt.svg`}
             alt="twitt"
           />
           <img
             className="socials__icon"
-            src={`${process.env.PUBLIC_URL}/assets/footer/youtube.svg`}
+            src={`${publicSrc}/assets/footer/youtube.svg`}
             alt="yout"
           />
         </div>

@@ -4,29 +4,32 @@ import InputNumber from 'rc-input-number';
 import ReactSlider from 'react-slider';
 import { Select } from '../Form/Select';
 import { Checkbox } from '../Form/Checkbox';
+import { ApplicationRequest } from '../ApplicationRequest';
+import { publicSrc } from '../../constants/publicSource';
 
 import './Calculator.scss';
 
 export const Calculator: FC = () => {
   const [selectValue, setSelectValue] = useState(null);
 
-  const [priceValue, setPriceValue] = useState(2000000);
-  const [initialFee, setInitialFee] = useState(0);
+  const [priceValue, setPriceValue] = useState(1);
+  const [initialFee, setInitialFee] = useState(1);
 
-  const [percent, setPercent] = useState(
-    // selectValue === 1 ? 10 : selectValue === 2 ? 20 : 10
-    10
-  );
+  const [percent, setPercent] = useState(10);
 
-  const [yaers, setYears] = useState(1);
+  const [years, setYears] = useState(5);
   // eslint-disable-next-line
   const [maternityCapital, setmMternityCapital] = useState(false);
 
-  const [psValue, setPsValue] = useState(9);
+  const [psValue, setPsValue] = useState(9.4);
   const [cascoValue, setCascoValue] = useState(false);
   const [lifeInsurance, setLifeInsrunce] = useState(false);
   // eslint-disable-next-line
   const [bankParticipant, setBankParticipant] = useState(false);
+
+  const [applicationForm, setApllicationForm] = useState(false);
+
+  const [finalSum, setFinalSum] = useState(0);
 
   const onChange = (value: number) => {
     setPriceValue(value);
@@ -43,13 +46,13 @@ export const Calculator: FC = () => {
     if (selectValue === 1) {
       percent <= 15 ? setPsValue(9.4) : setPsValue(8.5);
     }
-  });
+  }, [percent]);
 
   useEffect(() => {
     if (selectValue === 1) setPercent(10);
     if (selectValue === 2) setPercent(20);
     setPriceValue(2000000);
-    setYears(1);
+    setYears(5);
   }, [selectValue]);
 
   useEffect(() => {
@@ -72,28 +75,20 @@ export const Calculator: FC = () => {
     if (percent < 10) setPercent(10);
   }, [priceValue, percent]);
 
+  useEffect(() => {
+    setFinalSum(priceValue - initialFee);
+  }, [priceValue, initialFee]);
+
   const downHandler = (
     <div className="cost-coltroll__button">
-      <img
-        src={`${process.env.PUBLIC_URL}/assets/minus.svg`}
-        alt="minus-cost"
-      />
+      <img src={`${publicSrc}/assets/minus.svg`} alt="minus-cost" />
     </div>
   );
   const upHandler = (
     <div className="cost-coltroll__button">
-      <img src={`${process.env.PUBLIC_URL}/assets/plus.svg`} alt="plus-cost" />
+      <img src={`${publicSrc}/assets/plus.svg`} alt="plus-cost" />
     </div>
   );
-
-  /* const minPriceValue =
-    selectValue === 1
-      ? 1200000
-      : selectValue === 2
-      ? 500000
-      : selectValue === 3
-      ? 50000
-      : null; */
 
   const minPriceValue = () => {
     let v;
@@ -102,15 +97,6 @@ export const Calculator: FC = () => {
     if (selectValue === 3) v = 50000;
     return v;
   };
-
-  /* const maxPriceValue =
-    selectValue === 1
-      ? 25000000
-      : selectValue === 2
-      ? 5000000
-      : selectValue === 3
-      ? 3000000
-      : null; */
 
   const maxPriceValue = () => {
     let v;
@@ -122,9 +108,11 @@ export const Calculator: FC = () => {
 
   const regexReplace = /\B(?=(\d{3})+(?!\d))/g;
 
-  const SK = selectValue !== 3 ? priceValue - initialFee : priceValue;
+  const SK = selectValue !== 3 ? finalSum : priceValue;
+
   const returnPs = () => {
     let PS;
+
     if (selectValue === 1) {
       PS = percent <= 15 ? 0.00783 : 0.00708;
     } else {
@@ -134,13 +122,11 @@ export const Calculator: FC = () => {
   };
   const PS = returnPs();
 
-  const KP = yaers * 12;
+  const KP = years * 12;
 
-  const AP = (SK * (PS + PS / (Math.pow(1 + PS, KP) - 1))).toFixed(2);
+  const AP = (SK * (PS + PS / (Math.pow(1 + PS, KP) - 1))).toFixed(0);
 
-  // const reqIncome = (AP as any) * 2.2;
-
-  const reqIncome = Number(AP) * 2.2;
+  const reqIncome = Number(AP) * 2.22247;
 
   const offerDescriptionText = () => {
     let v = '';
@@ -150,33 +136,53 @@ export const Calculator: FC = () => {
     return v;
   };
 
+  const psValueText = () => {
+    if (selectValue === 1) {
+      return percent <= 15 ? '9.40 %' : '8.50 %';
+    }
+  };
+
   const offerOptions = [
     {
       id: 1,
-      title: `${(priceValue - initialFee)
+      title: `${finalSum
+        .toFixed(0)
         .toString()
         .replace(regexReplace, ' ')} рублей`,
       description: offerDescriptionText(),
     },
     {
       id: 2,
-      title: psValue,
+      title: psValueText(),
       description: 'Процентная ставка',
     },
     {
       id: 3,
-      title: AP.toString().replace(regexReplace, ' '),
+      title: `${Number(AP)
+        .toFixed(0)
+        .toString()
+        .replace(regexReplace, ' ')} рублей`,
       description: 'Ежемесячный платеж',
     },
     {
       id: 4,
-      title: reqIncome.toFixed(0).toString().replace(regexReplace, ' '),
+      title: `${reqIncome
+        .toFixed(0)
+        .toString()
+        .replace(regexReplace, ' ')} рублей`,
       description: 'Необходимый доход',
     },
   ];
 
+  const calculatorData = {
+    selectValue,
+    priceValue,
+    initialFee,
+    years,
+  };
+
   return (
-    <section className="calculator">
+    <section className="calculator" id="calculator">
       <div className="calculator__options">
         <h2 className="calculator__title">Кредитный калькулятор</h2>
         <p className="calculator__step">Шаг 1. Цель кредита</p>
@@ -189,13 +195,6 @@ export const Calculator: FC = () => {
               Шаг 2. Введите параметры кредита
             </h2>
             <p className="calculator__description">
-              {/* {selectValue === 1
-                ? 'Стоимость недвижимости'
-                : selectValue === 2
-                ? 'Стоимость автомобиля'
-                : selectValue === 3
-                ? 'Сумма потребительского кредита!'
-                : ''} */}
               {selectValue === 1 && 'Стоимость недвижимости'}
               {selectValue === 2 && 'Стоимость автомобиля'}
               {selectValue === 3 && 'Сумма потребительского кредита!'}
@@ -213,7 +212,8 @@ export const Calculator: FC = () => {
                   onChange={onChange}
                   step={100000}
                   formatter={(value: Number) =>
-                    `${value}`.replace(regexReplace, ' ')}
+                    `${value}`.replace(regexReplace, ' ')
+                  }
                   id="cost-value"
                   pattern="[0-9]{10}"
                 />
@@ -229,17 +229,20 @@ export const Calculator: FC = () => {
             {selectValue !== 3 && (
               <div className="initial-fee-wrapp">
                 <p className="calculator__description">Первоначальный взнос</p>
-                <label className="cost-coltroll" htmlFor="initial-fee">
+                <label
+                  className="cost-coltroll cost-coltroll--fee"
+                  htmlFor="initial-fee"
+                >
                   <InputNumber
-                    prefixCls="values__prefix"
+                    prefixCls="values__prefix values__prefix--fee"
                     aria-label="Number input example that demonstrates custom styling"
                     value={initialFee}
-                    min={initialFee}
-                    max={maxPriceValue()}
                     onChange={onChangeInitialFee}
                     step={100000}
+                    decimalSeparator="."
                     formatter={(value: Number) =>
-                      `${value}`.replace(regexReplace, ' ')}
+                      `${value}`.replace(regexReplace, ' ')
+                    }
                     id="initial-fee"
                     pattern="[0-9]{10}"
                   />
@@ -257,24 +260,28 @@ export const Calculator: FC = () => {
                   onChange={(value: unknown) => setPercent(Number(value))}
                 />
                 <span className="calculator__price-gap">
-                  {Math.trunc(percent * 100) / 100} %{' '}
+                  {Math.trunc(percent * 100) / 100}%{' '}
                 </span>
               </div>
             )}
 
-            <p className="calculator__description">Условия кредита</p>
-            <label className="cost-coltroll" htmlFor="loan-terms">
+            <p className="calculator__description calculator__description--term">Срок кредитования</p>
+            <label
+              className="cost-coltroll cost-coltroll--term"
+              htmlFor="loan-terms"
+            >
               <div className="values">
                 <InputNumber
-                  prefixCls="values__prefix"
+                  prefixCls="values__prefix values__prefix--term"
                   aria-label="Number input example that demonstrates custom styling"
-                  value={yaers}
-                  min={yaers}
+                  value={years}
+                  min={years}
                   max={selectValue === 3 ? 7 : 30}
                   onChange={onYearChange}
                   step={100000}
                   formatter={(value: Number) =>
-                    `${value}`.replace(regexReplace, ' ')}
+                    `${value}`.replace(regexReplace, ' ')
+                  }
                   id="loan-terms"
                   pattern="[0-9]{10}"
                 />
@@ -289,19 +296,23 @@ export const Calculator: FC = () => {
               min={1}
               step={1}
               max={selectValue === 3 ? 7 : 30}
-              value={yaers}
+              value={years}
               onChange={(value: unknown) => setYears(Number(value))}
             />
-            <span className="calculator__price-gap">{yaers} лет</span>
+            <div className="calculator__price-gap">
+              <span>{years} лет</span>
+              <span>30 лет</span>
+            </div>
             {selectValue === 1 && (
               <Checkbox
-                checboxLabel="Материнский капитал"
+                checboxLabel="Использовать материнский капитал"
                 id="maternity-capital"
                 onCheckboxChange={(v: boolean) => {
                   setmMternityCapital(v);
+
                   v
-                    ? setPriceValue(priceValue - 470000)
-                    : setPriceValue(priceValue + 470000);
+                    ? setFinalSum((prevVall) => prevVall - 470000)
+                    : setFinalSum((prevVall) => prevVall + 470000);
                 }}
               />
             )}
@@ -356,29 +367,35 @@ export const Calculator: FC = () => {
                   </div>
                 ))}
               </div>
-              <button type="button" className=" button bank-offer__button">
+              <a
+                href="#application-form"
+                type="button"
+                className=" button bank-offer__button"
+                onClick={() => setApllicationForm(true)}
+              >
                 Оформить заявку
-              </button>
+              </a>
             </div>
-            ) : (
-              <div className="calculator__offer">
-                <div className="bank-offer bank-offer--no-offer">
-                  <h2 className="bank-offer__title">
-                    Наш банк не выдаёт ипотечные кредиты меньше{' '}
-                    <span>
-                      {selectValue === 1 && '500 000'}
-                      {selectValue === 2 && '200 000'}
-                    </span>{' '}
-                    рублей
-                  </h2>
-                  <p className="offer-option__description">
-                    Попробуйте использовать другие параметры для расчёта.
-                  </p>
-                </div>
+          ) : (
+            <div className="calculator__offer">
+              <div className="bank-offer bank-offer--no-offer">
+                <h2 className="bank-offer__title">
+                  Наш банк не выдаёт ипотечные кредиты меньше{' '}
+                  <span>
+                    {selectValue === 1 && '500 000'}
+                    {selectValue === 2 && '200 000'}
+                  </span>{' '}
+                  рублей
+                </h2>
+                <p className="offer-option__description">
+                  Попробуйте использовать другие параметры для расчёта.
+                </p>
               </div>
-            )}
+            </div>
+          )}
         </div>
       )}
+      {applicationForm && <ApplicationRequest {...calculatorData} />}
     </section>
   );
 };
