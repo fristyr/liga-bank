@@ -17,17 +17,19 @@ export const Calculator: FC = () => {
 
   const [percent, setPercent] = useState(10);
 
-  const [years, setYears] = useState(1);
+  const [years, setYears] = useState(5);
   // eslint-disable-next-line
   const [maternityCapital, setmMternityCapital] = useState(false);
 
-  const [psValue, setPsValue] = useState(9);
+  const [psValue, setPsValue] = useState(9.4);
   const [cascoValue, setCascoValue] = useState(false);
   const [lifeInsurance, setLifeInsrunce] = useState(false);
   // eslint-disable-next-line
   const [bankParticipant, setBankParticipant] = useState(false);
 
   const [applicationForm, setApllicationForm] = useState(false);
+
+  const [finalSum, setFinalSum] = useState(0);
 
   const onChange = (value: number) => {
     setPriceValue(value);
@@ -41,15 +43,16 @@ export const Calculator: FC = () => {
   };
 
   useEffect(() => {
-    console.log('price value', priceValue);
-    console.log('initial fee value', initialFee);
-  }, [priceValue, initialFee]);
+    if (selectValue === 1) {
+      percent <= 15 ? setPsValue(9.4) : setPsValue(8.5);
+    }
+  }, [percent]);
 
   useEffect(() => {
     if (selectValue === 1) setPercent(10);
     if (selectValue === 2) setPercent(20);
     setPriceValue(2000000);
-    setYears(1);
+    setYears(5);
   }, [selectValue]);
 
   useEffect(() => {
@@ -71,6 +74,10 @@ export const Calculator: FC = () => {
     setInitialFee((priceValue / 100) * percent);
     if (percent < 10) setPercent(10);
   }, [priceValue, percent]);
+
+  useEffect(() => {
+    setFinalSum(priceValue - initialFee);
+  }, [priceValue, initialFee]);
 
   const downHandler = (
     <div className="cost-coltroll__button">
@@ -101,7 +108,7 @@ export const Calculator: FC = () => {
 
   const regexReplace = /\B(?=(\d{3})+(?!\d))/g;
 
-  const SK = selectValue !== 3 ? priceValue - initialFee : priceValue;
+  const SK = selectValue !== 3 ? finalSum : priceValue;
 
   const returnPs = () => {
     let PS;
@@ -119,7 +126,7 @@ export const Calculator: FC = () => {
 
   const AP = (SK * (PS + PS / (Math.pow(1 + PS, KP) - 1))).toFixed(0);
 
-  const reqIncome = Number(AP) * 2.2;
+  const reqIncome = Number(AP) * 2.22247;
 
   const offerDescriptionText = () => {
     let v = '';
@@ -129,27 +136,40 @@ export const Calculator: FC = () => {
     return v;
   };
 
+  const psValueText = () => {
+    if (selectValue === 1) {
+      return percent <= 15 ? '9.40 %' : '8.50 %';
+    }
+  };
+
   const offerOptions = [
     {
       id: 1,
-      title: `${(priceValue - initialFee)
+      title: `${finalSum
+        .toFixed(0)
         .toString()
-        .replace(regexReplace, ' ')} `,
+        .replace(regexReplace, ' ')} рублей`,
       description: offerDescriptionText(),
     },
     {
       id: 2,
-      title: `${psValue} %`,
+      title: psValueText(),
       description: 'Процентная ставка',
     },
     {
       id: 3,
-      title: `${AP.toString().replace(regexReplace, ' ')} `,
+      title: `${Number(AP)
+        .toFixed(0)
+        .toString()
+        .replace(regexReplace, ' ')} рублей`,
       description: 'Ежемесячный платеж',
     },
     {
       id: 4,
-      title: `${reqIncome.toFixed(0).toString().replace(regexReplace, ' ')} `,
+      title: `${reqIncome
+        .toFixed(0)
+        .toString()
+        .replace(regexReplace, ' ')} рублей`,
       description: 'Необходимый доход',
     },
   ];
@@ -219,6 +239,7 @@ export const Calculator: FC = () => {
                     value={initialFee}
                     onChange={onChangeInitialFee}
                     step={100000}
+                    decimalSeparator="."
                     formatter={(value: Number) =>
                       `${value}`.replace(regexReplace, ' ')
                     }
@@ -239,12 +260,12 @@ export const Calculator: FC = () => {
                   onChange={(value: unknown) => setPercent(Number(value))}
                 />
                 <span className="calculator__price-gap">
-                  {Math.trunc(percent * 100) / 100} %{' '}
+                  {Math.trunc(percent * 100) / 100}%{' '}
                 </span>
               </div>
             )}
 
-            <p className="calculator__description">Срок кредитования</p>
+            <p className="calculator__description calculator__description--term">Срок кредитования</p>
             <label
               className="cost-coltroll cost-coltroll--term"
               htmlFor="loan-terms"
@@ -288,9 +309,10 @@ export const Calculator: FC = () => {
                 id="maternity-capital"
                 onCheckboxChange={(v: boolean) => {
                   setmMternityCapital(v);
+
                   v
-                    ? setPriceValue(priceValue - 470000)
-                    : setPriceValue(priceValue + 470000);
+                    ? setFinalSum((prevVall) => prevVall - 470000)
+                    : setFinalSum((prevVall) => prevVall + 470000);
                 }}
               />
             )}
@@ -345,13 +367,14 @@ export const Calculator: FC = () => {
                   </div>
                 ))}
               </div>
-              <button
+              <a
+                href="#application-form"
                 type="button"
                 className=" button bank-offer__button"
                 onClick={() => setApllicationForm(true)}
               >
                 Оформить заявку
-              </button>
+              </a>
             </div>
           ) : (
             <div className="calculator__offer">

@@ -58,8 +58,7 @@
     padding-top: 23px;
     padding-bottom: 6px;
   }
-  flex-direction: column;
-  align-items: start;
+
   &::before {
     content: '';
     position: absolute;
@@ -116,5 +115,41 @@
     @include bp(desktop-sm) {
       max-width: 282px;
     }
+    &--phone {
+      @include bp(tablet)  {
+        margin-bottom: 23px;
+      }
+    }
+  }
+}
+
+.confirmation-modal {
+  position: relative;
+  max-width: 441px;
+  width: 100%;
+  background-color: $seconday-color;
+  padding: 30px;
+  padding-top: 52px;
+  padding-bottom: 54px;
+  border-radius: 4px;
+  &__button {
+    position: absolute;
+    right: 18px;
+    top: 23px;
+  }
+  &__title {
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 31px;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+  &__text {
+    font-size: 16px;
+    line-height: 22px;
+    color: $helper-dark-color;
+    text-align: center;
+    max-width: 293px;
+    margin: 0 auto;
   }
 }

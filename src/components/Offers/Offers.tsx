@@ -20,15 +20,14 @@ export const Offers: FC = () => {
     breakpoints: {
       1024: {
         allowTouchMove: false,
+        
       },
       300: {
         allowTouchMove: true,
+        
       },
     },
-    /* autoplay: {
-      delay: 2500,
-      disableOnInteraction: false,
-    }, */
+
   };
   const goToSlide = (id: Number) => {
     if (swiperRef?.current?.swiper) {
@@ -50,7 +49,7 @@ export const Offers: FC = () => {
             key={item.id}
             tabIndex={item.id}
             onClick={() => goToSlide(item.id)}
-            onKeyDown={(event) => {
+            onKeyUp={(event) => {
               if (swiperRef?.current?.swiper) {
                 if (event.key === 'Tab') {
                   swiperRef.current.swiper.slideTo(item.id);

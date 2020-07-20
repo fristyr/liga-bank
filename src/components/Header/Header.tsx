@@ -110,6 +110,7 @@ export const Header: React.FC = () => {
                 <span className="login-input__name">Логин</span>
                 <Input
                   inputClassName="login-input__element-1"
+                  autoFocus={true}
                   onInputChange={(e: string) => {
                     setCredentials({ ...credentials, username: e });
                   }}

@@ -7,11 +7,11 @@ import { publicSrc } from '../../constants/publicSource';
 export const Slider: React.FC = () => {
   const params = {
     centeredSlides: true,
-    /* loop: true, */
-    /*     autoplay: {
-      delay: 2500,
+    loop: true,
+    autoplay: {
+      delay: 4000,
       disableOnInteraction: false,
-    }, */
+    },
     pagination: {
       el: '.swiper-pagination.swiper-main-slides',
       clickable: true,
