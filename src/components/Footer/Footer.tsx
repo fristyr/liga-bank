@@ -16,16 +16,16 @@ export const Footer: FC = () => {
         </div>
 
         <div className="footer-offers">
-          <a href="/test" className="footer-offers__link">
+          <a href="#offers" className="footer-offers__link">
             Услуги
           </a>
-          <a href="/test" className="footer-offers__link">
+          <a href="#calculator" className="footer-offers__link">
             Рассчитать кредит
           </a>
-          <a href="/test" className="footer-offers__link">
+          <a href="#bank-branches" className="footer-offers__link">
             Контакты
           </a>
-          <a href="/test" className="footer-offers__link">
+          <a href="#offers" className="footer-offers__link">
             Задать вопрос
           </a>
         </div>
