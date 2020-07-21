@@ -1,0 +1,37 @@
+{
+  "title": "title",
+  "offersList": [
+    {
+      "itemButton": "Contributions",
+      "title": "Liga Bank deposits are a profitable investment in your future",
+      "descriptionList": [
+        "Interest on deposits up to 7%",
+        "Various conditions",
+        "Possibility of monthly capitalization or withdrawal of interest to a bank card"
+      ]
+    },
+    {
+      "itemButton": "Credits",
+      "title": "Liga Bank issues loans for any purpose",
+      "descriptionList": ["Mortgage", "Car loan", "Consumer loan"],
+      "html": "Calculate the monthly payment <br /> and the loan rate using our <a href=\"#calculator\"> loan calculator </a>"
+    },
+    {
+      "itemButton": "Insurance",
+      "title": "Liga Insurance - we will insure whatever you want",
+      "descriptionList": [
+        "Car insurance",
+        "Life and health insurance",
+        "Real estate insurance"
+      ]
+    },
+    {
+      "itemButton": "Online Services",
+      "title": "Liga Bank is a huge number of online services for your convenience",
+      "descriptionList": [
+        "Mobile bank, <br /> which is always at hand",
+        "The League Pass app allows you to pay for tickets around the world."
+      ]
+    }
+  ]
+}

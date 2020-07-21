@@ -1,14 +1,20 @@
 /* eslint-disable react/no-danger */
 import React, { FC, useRef, useState, useEffect, KeyboardEvent } from 'react';
 import Swiper, { SwiperRefNode } from 'react-id-swiper';
+import { useTranslation } from 'react-i18next';
 
 import classNames from 'classnames';
 import offersList from './offersList';
-
 import { publicSrc } from '../../constants/publicSource';
 import './Offers.scss';
 
 export const Offers: FC = () => {
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = (language: any) => {
+    i18n.changeLanguage(language);
+  };
+
   const swiperRef = useRef<SwiperRefNode>(null);
   const [slideIndex, setSlideIndex] = useState();
 
@@ -20,14 +26,11 @@ export const Offers: FC = () => {
     breakpoints: {
       1024: {
         allowTouchMove: false,
-        
       },
       300: {
         allowTouchMove: true,
-        
       },
     },
-
   };
   const goToSlide = (id: Number) => {
     if (swiperRef?.current?.swiper) {
@@ -42,6 +45,14 @@ export const Offers: FC = () => {
 
   return (
     <section className="offers" id="offers">
+      <button type="button" onClick={() => changeLanguage('en')}>
+        EN
+      </button>
+      <button type="button" onClick={() => changeLanguage('ru')}>
+        RU
+      </button>
+
+      <p>{t('title')}</p>
       <div className="offers-nav">
         {offersList.map((item, index) => (
           <button
