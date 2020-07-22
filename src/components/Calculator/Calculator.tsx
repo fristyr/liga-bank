@@ -31,6 +31,9 @@ export const Calculator: FC = () => {
 
   const [finalSum, setFinalSum] = useState(0);
 
+  const [loanNumber, setLoanNumber] = useState(10);
+
+
   const onChange = (value: number) => {
     setPriceValue(value);
   };
@@ -192,6 +195,8 @@ export const Calculator: FC = () => {
     priceValue,
     initialFee,
     years,
+    loanNumber,
+    setLoanNumber
   };
 
   return (

@@ -11,6 +11,8 @@ interface Props {
   initialFee?: number;
   years?: number;
   setApllicationForm?: React.Dispatch<React.SetStateAction<boolean>>;
+  loanNumber?: number;
+  setLoanNumber?: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export const ApplicationRequest: FC<Props> = ({
@@ -19,6 +21,8 @@ export const ApplicationRequest: FC<Props> = ({
   initialFee,
   years,
   setApllicationForm,
+  loanNumber,
+  setLoanNumber,
 }) => {
   const [reqCredentials, setReqCredentials] = useState({
     name: '',
@@ -28,8 +32,6 @@ export const ApplicationRequest: FC<Props> = ({
 
   const [reqConfirmModal, setReqConfirmModal] = useState(false);
   const [submitButtonState, setSubmitButtonState] = useState(true);
-
-  const [loanNumber, setLoanNumber] = useState(10);
 
   const { name, phone, email } = reqCredentials;
 
@@ -60,7 +62,7 @@ export const ApplicationRequest: FC<Props> = ({
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     setReqCredentials({ ...reqCredentials, name: '', phone: '', email: '' });
-    setLoanNumber((prev) => prev + 1);
+
     const reqData = {
       selectValue,
       priceValue,
@@ -76,6 +78,7 @@ export const ApplicationRequest: FC<Props> = ({
   };
 
   const reqModalVisibility = () => {
+    setLoanNumber(loanNumber + 1);
     setApllicationForm(false);
     setReqConfirmModal(!reqConfirmModal);
   };
