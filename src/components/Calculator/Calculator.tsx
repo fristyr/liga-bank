@@ -58,14 +58,28 @@ export const Calculator: FC = () => {
     setYears(2);
   }, [selectValue]);
 
+  /* useEffect(() => {
+    if (selectValue === 2) {
+      setPsValue(15);
+
+      cascoValue && lifeInsurance ? setPsValue(3.5) : setPsValue(8.5);
+    }
+  }, [selectValue, priceValue, cascoValue, lifeInsurance]); */
+
   useEffect(() => {
     if (selectValue === 1) {
       if (percent < 15) setPsValue(9.4);
       if (percent >= 15) setPsValue(8.5);
     }
     if (selectValue === 2) {
-      if (priceValue > 2000000) setPsValue(16);
-      if (priceValue < 2000000) setPsValue(15);
+      if (priceValue < 2000000) setPsValue(16);
+      if (priceValue >= 2000000) setPsValue(15);
+      if (cascoValue || lifeInsurance) {
+        setPsValue(8.5);
+      }
+      if (cascoValue && lifeInsurance) {
+        setPsValue(3.5);
+      }
     }
     if (selectValue === 3) {
       if (priceValue >= 2000000) setPsValue(9.5);
@@ -74,13 +88,7 @@ export const Calculator: FC = () => {
 
       if (priceValue < 750000) setPsValue(15);
     }
-  }, [selectValue, percent, priceValue]);
-
-  useEffect(() => {
-    if (selectValue === 2) {
-      cascoValue && lifeInsurance ? setPsValue(3.5) : setPsValue(8.5);
-    }
-  }, [selectValue, cascoValue, lifeInsurance]);
+  }, [selectValue, percent, priceValue, cascoValue, lifeInsurance]);
 
   useEffect(() => {
     setInitialFee((priceValue / 100) * percent);
@@ -230,7 +238,6 @@ export const Calculator: FC = () => {
 
   return (
     <section className="calculator" id="calculator">
-      {console.log('fired', psValue)}
       <div className="calculator__options">
         <h2 className="calculator__title">Кредитный калькулятор</h2>
         <p className="calculator__step">Шаг 1. Цель кредита</p>
@@ -351,10 +358,7 @@ export const Calculator: FC = () => {
             />
             <div className="calculator__price-gap">
               <span>{years} лет</span>
-              <span>
-                {maxPeriod()}
-                лет
-              </span>
+              <span>{maxPeriod()} лет</span>
             </div>
             {selectValue === 1 && (
               <Checkbox
