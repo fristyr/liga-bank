@@ -8,7 +8,8 @@
 # testing
 /coverage
 
-
+.firebaserc
+firebase.json
 
 # misc
 .DS_Store

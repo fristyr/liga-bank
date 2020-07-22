@@ -8,6 +8,7 @@ interface Props {
   inputClassName?: string;
   onInputChange?: (e: string) => void;
   autoFocus?: boolean;
+  inputValue?: string;
 }
 
 export const Input: FC<Props> = ({
@@ -16,7 +17,8 @@ export const Input: FC<Props> = ({
   inputPlaceholder,
   inputClassName,
   onInputChange,
-  autoFocus
+  autoFocus,
+  inputValue
 }) => {
   return (
     <input
@@ -28,6 +30,7 @@ export const Input: FC<Props> = ({
       id={inputId}
       // eslint-disable-next-line jsx-a11y/no-autofocus
       autoFocus={autoFocus}
+      value={inputValue}
       onChange={(e) => {
         if (onInputChange !== undefined) onInputChange(e.target.value);
       }}

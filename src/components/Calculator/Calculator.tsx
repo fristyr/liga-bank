@@ -196,7 +196,6 @@ export const Calculator: FC = () => {
 
   return (
     <section className="calculator" id="calculator">
-      {console.log(psValue)}
       <div className="calculator__options">
         <h2 className="calculator__title">Кредитный калькулятор</h2>
         <p className="calculator__step">Шаг 1. Цель кредита</p>
@@ -407,7 +406,7 @@ export const Calculator: FC = () => {
           )}
         </div>
       )}
-      {applicationForm && <ApplicationRequest {...calculatorData} />}
+      {applicationForm && <ApplicationRequest {...calculatorData} setApllicationForm={setApllicationForm} />}
     </section>
   );
 };

@@ -56,6 +56,11 @@ input[type='radio'].visually-hidden {
     background-color: $seconday-color;
     color: $main-color;
   }
+
+  &--disabled {
+    background: #353757;
+    cursor: not-allowed;
+  }
 }
 ul {
   margin: 0;
@@ -88,4 +93,8 @@ li {
   border-radius: 4px;
   background-color: transparent;
   width: 100%;
+}
+
+input:invalid {
+  box-shadow: none;
 }

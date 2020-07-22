@@ -1,8 +1,8 @@
-import React, { FC, FormEvent, useState } from 'react';
+import React, { FC, FormEvent, useState, useEffect } from 'react';
 import Modal from '@material-ui/core/Modal';
+import classNames from 'classnames';
 import { Input } from '../Form/Input';
 import closeIcon from '../../assets/close-icon.svg';
-
 import './ApplicationRequest.scss';
 
 interface Props {
@@ -10,6 +10,7 @@ interface Props {
   priceValue?: number;
   initialFee?: number;
   years?: number;
+  setApllicationForm?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const ApplicationRequest: FC<Props> = ({
@@ -17,23 +18,8 @@ export const ApplicationRequest: FC<Props> = ({
   priceValue,
   initialFee,
   years,
+  setApllicationForm,
 }) => {
-  const data = [
-    { title: 'Номер заявки', description: '№ 0010', id: '1' },
-    { title: 'Цель кредита', description: selectValue, id: '2' },
-    {
-      title: 'Стоимость недвижимости',
-      description: `${priceValue} рублей`,
-      id: '3',
-    },
-    {
-      title: 'Первоначальный взнос',
-      description: `${initialFee} рублей`,
-      id: '4',
-    },
-    { title: 'Срок кредитования', description: `${years} рублей`, id: '5' },
-  ];
-
   const [reqCredentials, setReqCredentials] = useState({
     name: '',
     phone: '',
@@ -41,14 +27,40 @@ export const ApplicationRequest: FC<Props> = ({
   });
 
   const [reqConfirmModal, setReqConfirmModal] = useState(false);
+  const [submitButtonState, setSubmitButtonState] = useState(true);
 
-  const reqModalVisibility = () => {
-    setReqConfirmModal(!reqConfirmModal);
+  const [loanNumber, setLoanNumber] = useState(10);
+
+  const { name, phone, email } = reqCredentials;
+
+  useEffect(() => {
+    if (name.length && phone.length && email.length >= 5) {
+      setSubmitButtonState(false);
+    } else {
+      setSubmitButtonState(true);
+    }
+  }, [name, phone, email]);
+
+  const loanPurpose = () => {
+    let v = '';
+    if (selectValue === 1) v = 'Ипотека';
+    if (selectValue === 2) v = 'Автокредит';
+    if (selectValue === 3) v = 'Потребительский кредит';
+    return v;
+  };
+
+  const loanName = () => {
+    let v = '';
+    if (selectValue === 1) v = 'Стоимость недвижимости';
+    if (selectValue === 2) v = 'Стоимость автомобиля';
+    if (selectValue === 3) v = 'Сумма кредита';
+    return v;
   };
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    const { name, phone, email } = reqCredentials;
+    setReqCredentials({ ...reqCredentials, name: '', phone: '', email: '' });
+    setLoanNumber((prev) => prev + 1);
     const reqData = {
       selectValue,
       priceValue,
@@ -59,8 +71,30 @@ export const ApplicationRequest: FC<Props> = ({
       email,
     };
     localStorage.setItem('Credit request', JSON.stringify(reqData));
-    reqModalVisibility();
+
+    setReqConfirmModal(true);
   };
+
+  const reqModalVisibility = () => {
+    setApllicationForm(false);
+    setReqConfirmModal(!reqConfirmModal);
+  };
+
+  const data = [
+    { title: 'Номер заявки', description: `№ 00${loanNumber}`, id: '1' },
+    { title: 'Цель кредита', description: loanPurpose(), id: '2' },
+    {
+      title: loanName(),
+      description: `${priceValue} рублей`,
+      id: '3',
+    },
+    {
+      title: 'Первоначальный взнос',
+      description: `${initialFee} рублей`,
+      id: '4',
+    },
+    { title: 'Срок кредитования', description: `${years} рублей`, id: '5' },
+  ];
 
   return (
     <form
@@ -86,6 +120,9 @@ export const ApplicationRequest: FC<Props> = ({
             onInputChange={(e: string) => {
               setReqCredentials({ ...reqCredentials, name: e });
             }}
+            inputValue={name}
+            autoFocus={true}
+            inputType="text"
           />
         </div>
         <div className="grid-input">
@@ -95,6 +132,8 @@ export const ApplicationRequest: FC<Props> = ({
             onInputChange={(e: string) => {
               setReqCredentials({ ...reqCredentials, phone: e });
             }}
+            inputValue={phone}
+            inputType="tel"
           />
           <Input
             inputPlaceholder="E-mail"
@@ -102,10 +141,18 @@ export const ApplicationRequest: FC<Props> = ({
             onInputChange={(e: string) => {
               setReqCredentials({ ...reqCredentials, email: e });
             }}
+            inputValue={email}
+            inputType="email"
           />
         </div>
       </div>
-      <button type="submit" className="button application-form__button">
+      <button
+        disabled={submitButtonState}
+        type="submit"
+        className={classNames('button application-form__button', {
+          'button--disabled': submitButtonState,
+        })}
+      >
         Отправить
       </button>
 

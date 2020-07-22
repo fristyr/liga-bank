@@ -120,8 +120,10 @@
 
 .phone {
   &__numb {
+    display: block;
     margin-bottom: 3px;
     position: relative;
+    color: inherit;
     & img {
       position: absolute;
       left: -29px;
