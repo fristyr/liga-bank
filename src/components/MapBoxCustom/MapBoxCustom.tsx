@@ -103,6 +103,7 @@ export const MapBoxCustom: FC<Props> = ({
             }}
           >
             <div>{selectedCity.name}</div>
+            
           </Popup>
         )}
       </ReactMapGL>

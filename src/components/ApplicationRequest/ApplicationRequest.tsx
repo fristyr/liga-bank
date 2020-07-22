@@ -3,6 +3,7 @@ import Modal from '@material-ui/core/Modal';
 import classNames from 'classnames';
 import { Input } from '../Form/Input';
 import closeIcon from '../../assets/close-icon.svg';
+
 import './ApplicationRequest.scss';
 
 interface Props {
@@ -42,6 +43,18 @@ export const ApplicationRequest: FC<Props> = ({
       setSubmitButtonState(true);
     }
   }, [name, phone, email]);
+
+
+  useEffect(() => {
+    if (window.innerWidth < 768)
+      window.scrollTo({ top: 1700, behavior: 'smooth' });
+
+    if (window.innerWidth < 400)
+      window.scrollTo({ top: 1850, behavior: 'smooth' });
+
+    if (window.innerWidth > 768)
+      window.scrollTo({ top: 2000, behavior: 'smooth' });
+  });
 
   const loanPurpose = () => {
     let v = '';
@@ -111,11 +124,12 @@ export const ApplicationRequest: FC<Props> = ({
     <form
       className="application-form"
       onSubmit={handleSubmit}
-      id="application-form"
+      //id="application-form"
     >
       <h2 className="calculator__step application-form__title">
         Шаг 3. Оформление заявки
       </h2>
+
       <div className="req-block">
         {data.map(({ title, description, id }) => (
           <div className="req-item" key={id}>

@@ -227,6 +227,10 @@ export const Calculator: FC = () => {
     },
   ];
 
+  const onReqSubmit = () => {
+    setApllicationForm(true);
+  };
+
   const calculatorData = {
     selectValue,
     priceValue,
@@ -239,6 +243,7 @@ export const Calculator: FC = () => {
   return (
     <section className="calculator" id="calculator">
       <div className="calculator__options">
+
         <h2 className="calculator__title">Кредитный калькулятор</h2>
         <p className="calculator__step">Шаг 1. Цель кредита</p>
         <div className="calculator__select-purpose">
@@ -420,14 +425,13 @@ export const Calculator: FC = () => {
                   </div>
                 ))}
               </div>
-              <a
-                href="#application-form"
+              <button
                 type="button"
                 className=" button bank-offer__button"
-                onClick={() => setApllicationForm(true)}
+                onClick={onReqSubmit}
               >
                 Оформить заявку
-              </a>
+              </button>
             </div>
           ) : (
             <div className="calculator__offer">
@@ -437,8 +441,9 @@ export const Calculator: FC = () => {
                   <span>
                     {selectValue === 1 && 'ипотечные'}
                     {selectValue === 2 && 'автокредиты'}
-                  </span> <br />
-                  кредиты меньше {' '}
+                  </span>{' '}
+                  <br />
+                  кредиты меньше{' '}
                   <span>
                     {selectValue === 1 && '500 000'}
                     {selectValue === 2 && '200 000'}
