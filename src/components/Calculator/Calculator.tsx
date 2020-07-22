@@ -17,7 +17,7 @@ export const Calculator: FC = () => {
 
   const [percent, setPercent] = useState(10);
 
-  const [years, setYears] = useState(5);
+  const [years, setYears] = useState(2);
   // eslint-disable-next-line
   const [maternityCapital, setmMternityCapital] = useState(false);
 
@@ -33,7 +33,6 @@ export const Calculator: FC = () => {
 
   const [loanNumber, setLoanNumber] = useState(10);
 
-
   const onChange = (value: number) => {
     setPriceValue(value);
   };
@@ -45,32 +44,42 @@ export const Calculator: FC = () => {
     setYears(value);
   };
 
-  useEffect(() => {
+  /*   useEffect(() => {
     if (selectValue === 1) {
-      percent <= 15 ? setPsValue(9.4) : setPsValue(8.5);
+      if (percent > 15) setPsValue(8.5);
+      if (percent < 15) setPsValue(9.4);
     }
-  }, [selectValue, percent]);
+  }, [selectValue, percent]); */
 
   useEffect(() => {
     if (selectValue === 1) setPercent(10);
     if (selectValue === 2) setPercent(20);
     setPriceValue(2000000);
-    setYears(5);
+    setYears(2);
   }, [selectValue]);
 
   useEffect(() => {
+    if (selectValue === 1) {
+      if (percent < 15) setPsValue(9.4);
+      if (percent >= 15) setPsValue(8.5);
+    }
     if (selectValue === 2) {
-      priceValue <= 2000000 ? setPsValue(16) : setPsValue(15);
+      if (priceValue > 2000000) setPsValue(16);
+      if (priceValue < 2000000) setPsValue(15);
     }
     if (selectValue === 3) {
+      if (priceValue >= 2000000) setPsValue(9.5);
+
+      if (priceValue < 2000000) setPsValue(12.5);
+
       if (priceValue < 750000) setPsValue(15);
-      if (priceValue > 750000 && priceValue < 2000000) setPsValue(12.5);
-      if (priceValue > 2000000) setPsValue(9.5);
     }
   }, [selectValue, percent, priceValue]);
 
   useEffect(() => {
-    cascoValue && lifeInsurance ? setPsValue(3.5) : setPsValue(8.5);
+    if (selectValue === 2) {
+      cascoValue && lifeInsurance ? setPsValue(3.5) : setPsValue(8.5);
+    }
   }, [selectValue, cascoValue, lifeInsurance]);
 
   useEffect(() => {
@@ -144,11 +153,17 @@ export const Calculator: FC = () => {
 
   const psValueText = () => {
     let percentVal;
-    if (selectValue === 1 && percent <= 15) {
+
+    /* if (selectValue === 1 && percent <= 15) {
       percentVal = '9.4 %';
     } else {
       percentVal = '8.5 %';
+    } */
+
+    if (selectValue === 1) {
+      percentVal = `${psValue} %`;
     }
+
     if (selectValue === 2) {
       percentVal = `${psValue} %`;
     }
@@ -156,6 +171,20 @@ export const Calculator: FC = () => {
       percentVal = `${psValue} %`;
     }
     return percentVal;
+  };
+
+  const maxPeriod = () => {
+    let period;
+    if (selectValue === 1) {
+      period = 30;
+    }
+    if (selectValue === 2) {
+      period = 5;
+    }
+    if (selectValue === 3) {
+      period = 7;
+    }
+    return period;
   };
 
   const offerOptions = [
@@ -196,11 +225,12 @@ export const Calculator: FC = () => {
     initialFee,
     years,
     loanNumber,
-    setLoanNumber
+    setLoanNumber,
   };
 
   return (
     <section className="calculator" id="calculator">
+      {console.log('fired', psValue)}
       <div className="calculator__options">
         <h2 className="calculator__title">Кредитный калькулятор</h2>
         <p className="calculator__step">Шаг 1. Цель кредита</p>
@@ -228,7 +258,7 @@ export const Calculator: FC = () => {
                   downHandler={downHandler}
                   upHandler={upHandler}
                   onChange={onChange}
-                  step={100000}
+                  step={selectValue === 3 ? 50000 : 100000}
                   formatter={(value: Number) =>
                     `${value}`.replace(regexReplace, ' ')
                   }
@@ -273,7 +303,7 @@ export const Calculator: FC = () => {
                   renderThumb={(props) => <div {...props} />}
                   value={percent}
                   step={5}
-                  min={10}
+                  min={selectValue === 1 ? 10 : 20}
                   max={100}
                   onChange={(value: unknown) => setPercent(Number(value))}
                 />
@@ -296,7 +326,7 @@ export const Calculator: FC = () => {
                   aria-label="Number input example that demonstrates custom styling"
                   value={years}
                   min={years}
-                  max={selectValue === 3 ? 7 : 30}
+                  max={maxPeriod()}
                   onChange={onYearChange}
                   step={100000}
                   formatter={(value: Number) =>
@@ -315,13 +345,16 @@ export const Calculator: FC = () => {
               renderThumb={(props) => <div {...props} />}
               min={1}
               step={1}
-              max={selectValue === 3 ? 7 : 30}
+              max={maxPeriod()}
               value={years}
               onChange={(value: unknown) => setYears(Number(value))}
             />
             <div className="calculator__price-gap">
               <span>{years} лет</span>
-              <span>30 лет</span>
+              <span>
+                {maxPeriod()}
+                лет
+              </span>
             </div>
             {selectValue === 1 && (
               <Checkbox
@@ -411,7 +444,12 @@ export const Calculator: FC = () => {
           )}
         </div>
       )}
-      {applicationForm && <ApplicationRequest {...calculatorData} setApllicationForm={setApllicationForm} />}
+      {applicationForm && (
+        <ApplicationRequest
+          {...calculatorData}
+          setApllicationForm={setApllicationForm}
+        />
+      )}
     </section>
   );
 };
