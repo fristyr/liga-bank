@@ -106,6 +106,7 @@
   margin-bottom: 30px;
   @include bp(desktop-sm) {
     margin-bottom: 30px;
+    align-items: baseline;
   }
   @include bp(tablet) {
     flex-wrap: wrap;
@@ -116,6 +117,10 @@
     @include bp(desktop-sm) {
       max-width: 282px;
     }
+    @include bp(tablet) {
+      max-width: 100%;
+    }
+    
     &--phone {
       @include bp(tablet)  {
         margin-bottom: 23px;
