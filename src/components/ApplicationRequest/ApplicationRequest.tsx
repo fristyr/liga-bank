@@ -80,17 +80,25 @@ export const ApplicationRequest: FC<Props> = ({
     setReqConfirmModal(!reqConfirmModal);
   };
 
+  const regexReplace = /\B(?=(\d{3})+(?!\d))/g;
+
   const data = [
     { title: 'Номер заявки', description: `№ 00${loanNumber}`, id: '1' },
     { title: 'Цель кредита', description: loanPurpose(), id: '2' },
     {
       title: loanName(),
-      description: `${priceValue} рублей`,
+      description: `${priceValue
+        .toFixed(0)
+        .toString()
+        .replace(regexReplace, ' ')} рублей`,
       id: '3',
     },
     {
       title: 'Первоначальный взнос',
-      description: `${initialFee} рублей`,
+      description: `${initialFee
+        .toFixed(0)
+        .toString()
+        .replace(regexReplace, ' ')} рублей`,
       id: '4',
     },
     { title: 'Срок кредитования', description: `${years} лет`, id: '5' },
