@@ -437,7 +437,7 @@ export const Calculator: FC = () => {
                   <span>
                     {selectValue === 1 && 'ипотечные'}
                     {selectValue === 2 && 'автокредиты'}
-                  </span> <br/>
+                  </span> <br />
                   кредиты меньше {' '}
                   <span>
                     {selectValue === 1 && '500 000'}

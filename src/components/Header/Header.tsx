@@ -49,16 +49,16 @@ export const Header: React.FC = () => {
 
       <nav className="nav">
         <Drawer open={burgerVisibility} onClose={burgerMenu}>
-          <a href="#offers" className="nav__link">
+          <a href="#offers" className="nav__link" onClick={burgerMenu}>
             Услуги
           </a>
-          <a href="#calculator" className="nav__link">
+          <a href="#calculator" className="nav__link" onClick={burgerMenu}>
             Рассчитать кредит
           </a>
-          <a href="#bank-branches" className="nav__link">
+          <a href="#bank-branches" className="nav__link" onClick={burgerMenu}>
             Контакты
           </a>
-          <a href="#footer" className="nav__link">
+          <a href="#footer" className="nav__link" onClick={burgerMenu}>
             Задать вопрос
           </a>
         </Drawer>
