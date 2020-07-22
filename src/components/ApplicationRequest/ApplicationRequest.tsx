@@ -93,7 +93,7 @@ export const ApplicationRequest: FC<Props> = ({
       description: `${initialFee} рублей`,
       id: '4',
     },
-    { title: 'Срок кредитования', description: `${years} рублей`, id: '5' },
+    { title: 'Срок кредитования', description: `${years} лет`, id: '5' },
   ];
 
   return (
