@@ -433,11 +433,16 @@ export const Calculator: FC = () => {
             <div className="calculator__offer">
               <div className="bank-offer bank-offer--no-offer">
                 <h2 className="bank-offer__title">
-                  Наш банк не выдаёт ипотечные кредиты меньше{' '}
+                  Наш банк не выдаёт{' '}
+                  <span>
+                    {selectValue === 1 && 'ипотечные'}
+                    {selectValue === 2 && 'автокредиты'}
+                  </span> <br/>
+                  кредиты меньше {' '}
                   <span>
                     {selectValue === 1 && '500 000'}
                     {selectValue === 2 && '200 000'}
-                  </span>{' '}
+                  </span>
                   рублей
                 </h2>
                 <p className="offer-option__description">
