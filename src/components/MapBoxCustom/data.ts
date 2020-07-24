@@ -11,9 +11,9 @@ export const regions = {
     zoom: 4.011128051569832,
   },
   regioCis: {
-    latitude: 43.220356311598756,
-    longitude: 62.7613466431911,
-    zoom: 4.30562515363811,
+    latitude: 48.07985533875179,
+    longitude: 56.978157100810336,
+    zoom: 3.6619614155996483,
   },
   regioEurope: {
     latitude: 48.42069368023315,
@@ -26,13 +26,13 @@ export const regions = {
     zoom: 3.130480087742017,
   },
   regioRussiaAndEurope: {
-    latitude: 59.33945563374431,
-    longitude: 39.95509432757227,
-    zoom: 2.91984440124643,
+    latitude: 52.47594047314631,
+    longitude: 37.116264071677406,
+    zoom: 3.2250001320047437,
   },
   regioCisAndEurope: {
-    latitude: 41.687281342791294,
-    longitude: 38.21748941203379,
+    latitude: 50.94027240781669,
+    longitude: 37.022542282027686,
     zoom: 3.234906308220797,
   },
 };
@@ -109,6 +109,7 @@ export const cities = [
       longitude: 76.85125,
     },
   },
+
   {
     coordinates: {
       name: 'Paris',

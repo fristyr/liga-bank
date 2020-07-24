@@ -1,5 +1,5 @@
 /* eslint-disable react/no-danger */
-import React, { FC, useRef, useState, useEffect, KeyboardEvent } from 'react';
+import React, { FC, useRef, useState, useEffect } from 'react';
 import Swiper, { SwiperRefNode } from 'react-id-swiper';
 
 import classNames from 'classnames';

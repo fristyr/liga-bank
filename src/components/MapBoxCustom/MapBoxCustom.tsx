@@ -27,6 +27,7 @@ export const MapBoxCustom: FC<Props> = ({
   const [selectedCity, setSelectedCity] = useState<SelectedCountry | null>(
     null
   );
+  const [filterRegions, setFilterRegions] = useState(cities);
 
   const { width } = useWindowSize();
 
@@ -39,27 +40,68 @@ export const MapBoxCustom: FC<Props> = ({
     regioCisAndEurope,
   } = regions;
 
+  const remove = (arr, ...args) => {
+    return arr.filter((item) => {
+      return !args.some((arg, index) => {
+        return arr.indexOf(item) === arg;
+      });
+    });
+  };
+
   useEffect(() => {
-    if (!russia && !cis && !europe) setViewport(defaultCoordinates);
+    if (!russia && !cis && !europe) {
+      setViewport(defaultCoordinates);
+      setFilterRegions(cities);
+    };
 
-    if (russia) setViewport(regioRussia);
+    if (russia) {
+      setViewport(regioRussia);
+      setFilterRegions( cities.slice(0, 6));
+    }
 
-    if (cis) setViewport(regioCis);
+    if (cis) {
+      setViewport(regioCis);
+      setFilterRegions(cities.slice(6, 10));
+    }
 
-    if (europe) setViewport(regioEurope);
+    if (europe) {
+      setViewport(regioEurope);
+      setFilterRegions(cities.slice(10));
+    } ;
 
-    if (russia && cis) setViewport(regioRussiaAndCis);
+    if (russia && cis) {
+      setViewport(regioRussiaAndCis);
+      setFilterRegions(cities.slice(0,10));
+    };
 
-    if (russia && europe) setViewport(regioRussiaAndEurope);
+    if (russia && europe) {
+      setViewport(regioRussiaAndEurope);
+      setFilterRegions(remove(cities, 6,7,8,9) );
+      
+      
+    };
 
-    if (europe && cis) setViewport(regioCisAndEurope);
+    if (europe && cis) {
+      setViewport(regioCisAndEurope);
+      setFilterRegions(cities.slice(6));
+    };
 
-    if (russia && cis && europe) setViewport(defaultCoordinates);
+    if (russia && cis && europe) {
+      setViewport(defaultCoordinates);
+      setFilterRegions(cities);
+    };
+
+    // eslint-disable-next-line
   }, [russia, cis, europe]);
 
   const size = 40;
+
+  
+
   return (
     <div>
+      {console.log('delete elements', remove(cities, 6,7,8,9) )}
+      {console.log(viewport)}
       <ReactMapGL
         width="100%"
         height={width <= 767 ? '381px' : '460px'}
@@ -73,7 +115,7 @@ export const MapBoxCustom: FC<Props> = ({
             onViewportChange={(nextViewport) => setViewport(nextViewport)}
           />
         </div>
-        {cities.map(({ coordinates }) => (
+        {filterRegions.map(({ coordinates }) => (
           <Marker
             key={coordinates.name}
             latitude={coordinates.latitude}
@@ -103,7 +145,6 @@ export const MapBoxCustom: FC<Props> = ({
             }}
           >
             <div>{selectedCity.name}</div>
-            
           </Popup>
         )}
       </ReactMapGL>

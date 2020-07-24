@@ -148,6 +148,7 @@ export const ApplicationRequest: FC<Props> = ({
             inputValue={name}
             autoFocus={true}
             inputType="text"
+            inputRequired={true}
           />
         </div>
         <div className="grid-input">
@@ -158,7 +159,8 @@ export const ApplicationRequest: FC<Props> = ({
               setReqCredentials({ ...reqCredentials, phone: e });
             }}
             inputValue={phone}
-            inputType="tel"
+            inputType="number"
+            inputRequired={true}
           />
           <Input
             inputPlaceholder="E-mail"
@@ -168,6 +170,7 @@ export const ApplicationRequest: FC<Props> = ({
             }}
             inputValue={email}
             inputType="email"
+            inputRequired={true}
           />
         </div>
       </div>

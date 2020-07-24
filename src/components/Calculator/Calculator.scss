@@ -118,17 +118,23 @@
   padding: 15px;
   margin-bottom: 7px;
   transition: 250ms;
+  &:hover {
+    border: 1px solid $accent-color;
+  }
+  &--error {
+    border: 1px solid $error-color;
+    &:hover {
+      border: 1px solid $error-color;
+    }
+  }
   @include bp(desktop-sm) {
     padding: 16px;
   }
   @include bp(tablet) {
     padding-left: 12px;
-    padding-right: 21px;
+    padding-right: 12px;
   }
 
-  &:hover {
-    border: 1px solid $accent-color;
-  }
   &--fee {
     margin-bottom: 24px;
     @include bp(desktop-sm) {
@@ -174,11 +180,11 @@
       max-width: 460px;
     }
     @include bp(desktop-sm) {
-      max-width: 95%;
+      max-width: 93%;
+      transform: translate(-50.2%, -48%);
     }
     @include bp(tablet) {
       max-width: 90%;
-      transform: translate(-50%, -50%);
     }
   }
   &__prefix-input-wrap {
@@ -194,6 +200,24 @@
     cursor: pointer;
     @include bp(desktop-sm) {
       font-size: 16px;
+    }
+  }
+  &__sign {
+    &--error-block {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5px;
+      border-radius: 5px;
+      left: 50%;
+      transform: translate(-50%, 2%);
+      z-index: 5;
+      background: #fff;
+      color: $error-color;
+      font-weight: bold;
+      max-width: 270px;
+      width: 100%;
     }
   }
   &__prefix-input-wrap > input {

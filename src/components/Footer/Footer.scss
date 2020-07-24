@@ -45,7 +45,6 @@
     @include bp(tablet) {
       padding-left: 32px;
       padding-top: 15px;
-
     }
   }
 }
@@ -74,7 +73,6 @@
       font-size: 14px;
     }
   }
-  
 }
 
 .location {
@@ -116,8 +114,6 @@
   }
 }
 
-
-
 .phone {
   &__numb {
     display: block;
@@ -140,7 +136,6 @@
     }
     @include bp(tablet) {
       margin-bottom: 19px;
-
     }
   }
   &--fix {
@@ -170,6 +165,13 @@
 }
 
 .socials {
+  & a {
+    transition: 250ms;
+    display: inline-block;
+    &:hover {
+      transform: translate(0px, -7px);
+    }
+  }
   @include bp(desktop-sm) {
     margin-left: -30px;
   }

@@ -6,7 +6,7 @@ import { Select } from '../Form/Select';
 import { Checkbox } from '../Form/Checkbox';
 import { ApplicationRequest } from '../ApplicationRequest';
 import { publicSrc } from '../../constants/publicSource';
-
+import classNames from 'classnames';
 import './Calculator.scss';
 
 export const Calculator: FC = () => {
@@ -58,13 +58,6 @@ export const Calculator: FC = () => {
     setYears(2);
   }, [selectValue]);
 
-  /* useEffect(() => {
-    if (selectValue === 2) {
-      setPsValue(15);
-
-      cascoValue && lifeInsurance ? setPsValue(3.5) : setPsValue(8.5);
-    }
-  }, [selectValue, priceValue, cascoValue, lifeInsurance]); */
 
   useEffect(() => {
     if (selectValue === 1) {
@@ -162,12 +155,6 @@ export const Calculator: FC = () => {
   const psValueText = () => {
     let percentVal;
 
-    /* if (selectValue === 1 && percent <= 15) {
-      percentVal = '9.4 %';
-    } else {
-      percentVal = '8.5 %';
-    } */
-
     if (selectValue === 1) {
       percentVal = `${psValue} %`;
     }
@@ -243,7 +230,6 @@ export const Calculator: FC = () => {
   return (
     <section className="calculator" id="calculator">
       <div className="calculator__options">
-
         <h2 className="calculator__title">Кредитный калькулятор</h2>
         <p className="calculator__step">Шаг 1. Цель кредита</p>
         <div className="calculator__select-purpose">
@@ -259,7 +245,14 @@ export const Calculator: FC = () => {
               {selectValue === 2 && 'Стоимость автомобиля'}
               {selectValue === 3 && 'Сумма потребительского кредита!'}
             </p>
-            <label className="cost-coltroll" htmlFor="cost-value">
+            <label
+              className={classNames('cost-coltroll', {
+                'cost-coltroll--error':
+                  /^(.*[a-zA-Z].*)$/.test(priceValue.toString()) ||
+                  priceValue < minPriceValue(),
+              })}
+              htmlFor="cost-value"
+            >
               <div className="values">
                 <InputNumber
                   prefixCls="values__prefix"
@@ -278,6 +271,13 @@ export const Calculator: FC = () => {
                   pattern="[0-9]{10}"
                 />
                 <span className="values__sign"> рублей </span>
+
+                {priceValue < minPriceValue() && (
+                  <span className="values__sign--error-block">Некорректное значение</span>
+                )}
+                {/^(.*[a-zA-Z].*)$/.test(priceValue.toString()) && (
+                  <span className="values__sign--error-block">Некорректное значение</span>
+                )}
               </div>
             </label>
             <span className="calculator__price-gap">
@@ -296,7 +296,7 @@ export const Calculator: FC = () => {
                   <InputNumber
                     prefixCls="values__prefix values__prefix--fee"
                     aria-label="Number input example that demonstrates custom styling"
-                    value={initialFee}
+                    value={isFinite(initialFee) ? initialFee : 0 }
                     onChange={onChangeInitialFee}
                     step={100000}
                     decimalSeparator="."
