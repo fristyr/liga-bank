@@ -1,11 +1,11 @@
 import { COLORS } from '../../constants/colors';
-const { accentColor, mainColor, secondayColor } = COLORS;
+const { accentColor, mainColor } = COLORS;
 
 export const customStyles = {
   container: (base: object) => ({
     ...base,
-
     width: '70px',
+    
   }),
 
   menu: (base: any) => ({
@@ -30,7 +30,7 @@ export const customStyles = {
       borderColor: state.selectProps.menuIsOpen ? accentColor : accentColor,
     },
     '@media only screen and (max-width: 767px) ': {
-      paddingLeft: '5px',
+      paddingRight: '10px',
     },
   }),
 };
