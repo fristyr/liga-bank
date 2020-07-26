@@ -3,8 +3,8 @@ import CustomSelect from 'react-select';
 import classNames from 'classnames';
 import { ValueType } from 'react-select/src/types';
 import { customStyles } from './styles';
-import { dataValues } from './data';
 import { publicSrc } from '../../../constants/publicSource';
+import { useTranslation } from 'react-i18next';
 
 import './Select.scss';
 
@@ -15,6 +15,14 @@ interface Props {
 
 export const Select: FC<Props> = ({ onSelectChanged }) => {
   type OptionType = { label: string; value: number };
+  const { t } = useTranslation();
+
+  const dataValues = [
+    { label: t('calculator.selectValues.0'), value: 1 },
+    { label: t('calculator.selectValues.1'), value: 2 },
+    { label: t('calculator.selectValues.2'), value: 3 },
+  ];
+
   return (
     <CustomSelect
       options={dataValues}
@@ -24,7 +32,7 @@ export const Select: FC<Props> = ({ onSelectChanged }) => {
       }}
       isMulti={false}
       styles={customStyles}
-      placeholder="Выберите цель кредита"
+      placeholder={t('calculator.selectPlaceholder')}
       components={{
         IndicatorSeparator: () => null,
         DropdownIndicator: (state) => (

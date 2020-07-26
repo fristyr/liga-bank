@@ -1,14 +1,16 @@
 /* eslint-disable react/no-danger */
 import React, { FC, useRef, useState, useEffect } from 'react';
 import Swiper, { SwiperRefNode } from 'react-id-swiper';
+import { useTranslation } from 'react-i18next';
 
 import classNames from 'classnames';
 import offersList from './offersList';
-
 import { publicSrc } from '../../constants/publicSource';
 import './Offers.scss';
 
 export const Offers: FC = () => {
+  const { t } = useTranslation();
+
   const swiperRef = useRef<SwiperRefNode>(null);
   const [slideIndex, setSlideIndex] = useState();
 
@@ -20,14 +22,11 @@ export const Offers: FC = () => {
     breakpoints: {
       1024: {
         allowTouchMove: false,
-        
       },
       300: {
         allowTouchMove: true,
-        
       },
     },
-
   };
   const goToSlide = (id: Number) => {
     if (swiperRef?.current?.swiper) {
@@ -42,6 +41,7 @@ export const Offers: FC = () => {
 
   return (
     <section className="offers" id="offers">
+      
       <div className="offers-nav">
         {offersList.map((item, index) => (
           <button
@@ -115,7 +115,7 @@ export const Offers: FC = () => {
                         href={buttonLink}
                         className="button description__button"
                       >
-                        Узнать подробнее
+                        {t('offerNames.offerButton')}
                       </a>
                     )}
                     {__html && (
