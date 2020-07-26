@@ -1,11 +1,17 @@
 import React from 'react';
 import './scss/App.scss';
-import { Header, Slider, Offers, Calculator, Footer, BankBranches  } from './components';
-
+import {
+  Header,
+  Slider,
+  Offers,
+  Calculator,
+  Footer,
+  BankBranches,
+} from './components';
 
 function App() {
 
-  
+
   return (
     <div className="app">
       <Header />

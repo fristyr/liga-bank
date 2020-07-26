@@ -6,6 +6,8 @@ import { Select } from '../Form/Select';
 import { Checkbox } from '../Form/Checkbox';
 import { ApplicationRequest } from '../ApplicationRequest';
 import { publicSrc } from '../../constants/publicSource';
+import { useTranslation } from 'react-i18next';
+
 import classNames from 'classnames';
 import './Calculator.scss';
 
@@ -33,6 +35,8 @@ export const Calculator: FC = () => {
 
   const [loanNumber, setLoanNumber] = useState(10);
 
+  const { t } = useTranslation();
+
   const onChange = (value: number) => {
     setPriceValue(value);
   };
@@ -57,7 +61,6 @@ export const Calculator: FC = () => {
     setPriceValue(2000000);
     setYears(2);
   }, [selectValue]);
-
 
   useEffect(() => {
     if (selectValue === 1) {
@@ -146,9 +149,9 @@ export const Calculator: FC = () => {
 
   const offerDescriptionText = () => {
     let v = '';
-    if (selectValue === 1) v = 'Сумма ипотеки';
-    if (selectValue === 2) v = 'Сумма автокредита';
-    if (selectValue === 3) v = 'Сумма кредита';
+    if (selectValue === 1) v = t('calculator.bankOfferTitle.0');
+    if (selectValue === 2) v = t('calculator.bankOfferTitle.1');
+    if (selectValue === 3) v = t('calculator.bankOfferTitle.2');
     return v;
   };
 
@@ -185,32 +188,30 @@ export const Calculator: FC = () => {
   const offerOptions = [
     {
       id: 1,
-      title: `${finalSum
-        .toFixed(0)
-        .toString()
-        .replace(regexReplace, ' ')} рублей`,
+      title: `${finalSum.toFixed(0).toString().replace(regexReplace, ' ')} ${t(
+        'calculator.currencyName'
+      )}`,
       description: offerDescriptionText(),
     },
     {
       id: 2,
       title: psValueText(),
-      description: 'Процентная ставка',
+      description: t('calculator.bankOfferDescription.0'),
     },
     {
       id: 3,
       title: `${Number(AP)
         .toFixed(0)
         .toString()
-        .replace(regexReplace, ' ')} рублей`,
-      description: 'Ежемесячный платеж',
+        .replace(regexReplace, ' ')} ${t('calculator.currencyName')}`,
+      description: t('calculator.bankOfferDescription.1'),
     },
     {
       id: 4,
-      title: `${reqIncome
-        .toFixed(0)
-        .toString()
-        .replace(regexReplace, ' ')} рублей`,
-      description: 'Необходимый доход',
+      title: `${reqIncome.toFixed(0).toString().replace(regexReplace, ' ')} ${t(
+        'calculator.currencyName'
+      )}`,
+      description: t('calculator.bankOfferDescription.2'),
     },
   ];
 
@@ -230,20 +231,20 @@ export const Calculator: FC = () => {
   return (
     <section className="calculator" id="calculator">
       <div className="calculator__options">
-        <h2 className="calculator__title">Кредитный калькулятор</h2>
-        <p className="calculator__step">Шаг 1. Цель кредита</p>
+        <h2 className="calculator__title">{t('calculator.title')}</h2>
+        <p className="calculator__step">{t('calculator.steps.0')}</p>
         <div className="calculator__select-purpose">
           <Select onSelectChanged={setSelectValue} />
         </div>
         {selectValue && (
           <div className="calculator__parametrs">
             <h2 className="calculator__step">
-              Шаг 2. Введите параметры кредита
+              {t('calculator.steps.1')}
             </h2>
             <p className="calculator__description">
-              {selectValue === 1 && 'Стоимость недвижимости'}
-              {selectValue === 2 && 'Стоимость автомобиля'}
-              {selectValue === 3 && 'Сумма потребительского кредита!'}
+              {selectValue === 1 && t('calculator.descriptionName.0')}
+              {selectValue === 2 && t('calculator.descriptionName.1')}
+              {selectValue === 3 && t('calculator.descriptionName.2')}
             </p>
             <label
               className={classNames('cost-coltroll', {
@@ -270,25 +271,29 @@ export const Calculator: FC = () => {
                   id="cost-value"
                   pattern="[0-9]{10}"
                 />
-                <span className="values__sign"> рублей </span>
+                <span className="values__sign"> {t('calculator.currencyName')} </span>
 
                 {priceValue < minPriceValue() && (
-                  <span className="values__sign--error-block">Некорректное значение</span>
+                  <span className="values__sign--error-block">
+                    {t('calculator.errorText')}
+                  </span>
                 )}
                 {/^(.*[a-zA-Z].*)$/.test(priceValue.toString()) && (
-                  <span className="values__sign--error-block">Некорректное значение</span>
+                  <span className="values__sign--error-block">
+                    {t('calculator.errorText')}
+                  </span>
                 )}
               </div>
             </label>
             <span className="calculator__price-gap">
-              {selectValue === 1 && 'От 1 200 000 до 25 000 000 рублей'}
-              {selectValue === 2 && 'От 500 000 до 5 000 000 рублей'}
-              {selectValue === 3 && 'От 50 000 до 3 000 000 рублей'}
+              {selectValue === 1 && t('calculator.priceGap.0')}
+              {selectValue === 2 && t('calculator.priceGap.1')}
+              {selectValue === 3 && t('calculator.priceGap.2')}
             </span>
 
             {selectValue !== 3 && (
               <div className="initial-fee-wrapp">
-                <p className="calculator__description">Первоначальный взнос</p>
+                <p className="calculator__description">{t('calculator.initialFee')}</p>
                 <label
                   className="cost-coltroll cost-coltroll--fee"
                   htmlFor="initial-fee"
@@ -296,7 +301,7 @@ export const Calculator: FC = () => {
                   <InputNumber
                     prefixCls="values__prefix values__prefix--fee"
                     aria-label="Number input example that demonstrates custom styling"
-                    value={isFinite(initialFee) ? initialFee : 0 }
+                    value={isFinite(initialFee) ? initialFee : 0}
                     onChange={onChangeInitialFee}
                     step={100000}
                     decimalSeparator="."
@@ -306,7 +311,7 @@ export const Calculator: FC = () => {
                     id="initial-fee"
                     pattern="[0-9]{10}"
                   />
-                  <span className="values__sign"> рублей </span>
+                  <span className="values__sign"> {t('calculator.currencyName')} </span>
                 </label>
                 <ReactSlider
                   className="horizontal-slider"
@@ -326,7 +331,7 @@ export const Calculator: FC = () => {
             )}
 
             <p className="calculator__description calculator__description--term">
-              Срок кредитования
+            {t('calculator.term.0')}
             </p>
             <label
               className="cost-coltroll cost-coltroll--term"
@@ -347,7 +352,7 @@ export const Calculator: FC = () => {
                   id="loan-terms"
                   pattern="[0-9]{10}"
                 />
-                <span className="values__sign"> лет </span>
+                <span className="values__sign"> {t('calculator.term.1')} </span>
               </div>
             </label>
             <ReactSlider
@@ -362,12 +367,12 @@ export const Calculator: FC = () => {
               onChange={(value: unknown) => setYears(Number(value))}
             />
             <div className="calculator__price-gap">
-              <span>{years} лет</span>
-              <span>{maxPeriod()} лет</span>
+              <span>{years} {t('calculator.term.1')}</span>
+              <span>{maxPeriod()} {t('calculator.term.1')}</span>
             </div>
             {selectValue === 1 && (
               <Checkbox
-                checboxLabel="Использовать материнский капитал"
+                checboxLabel={t('calculator.checkBoxNames.0')}
                 id="maternity-capital"
                 onCheckboxChange={(v: boolean) => {
                   setmMternityCapital(v);
@@ -378,14 +383,14 @@ export const Calculator: FC = () => {
             {selectValue === 2 && (
               <div>
                 <Checkbox
-                  checboxLabel="Оформить КАСКО в нашем банке"
+                  checboxLabel={t('calculator.checkBoxNames.1')}
                   id="casco"
                   onCheckboxChange={(v: boolean) => {
                     setCascoValue(v);
                   }}
                 />
                 <Checkbox
-                  checboxLabel="Оформить Страхование жизни в нашем банке"
+                  checboxLabel={t('calculator.checkBoxNames.2')}
                   id="life-insurance"
                   onCheckboxChange={(v: boolean) => {
                     setLifeInsrunce(v);
@@ -397,7 +402,7 @@ export const Calculator: FC = () => {
             {selectValue === 3 && (
               <Checkbox
                 id="consumer-credit"
-                checboxLabel="Участник зарплатного проекта нашего банка"
+                checboxLabel={t('calculator.checkBoxNames.3')}
                 onCheckboxChange={(v: boolean) => {
                   setBankParticipant(v);
                   v ? setPsValue(psValue - 0.5) : setPsValue(psValue + 0.5);
@@ -414,7 +419,7 @@ export const Calculator: FC = () => {
           (selectValue === 2 && priceValue - initialFee > 200000) ||
           selectValue === 3 ? (
             <div className="bank-offer">
-              <h2 className="bank-offer__title">Наше предложение</h2>
+              <h2 className="bank-offer__title"> {t('calculator.offer')}</h2>
               <div className="bank-offer__options ">
                 {offerOptions.map(({ id, title, description }) => (
                   <div className="offer-option" key={id}>
@@ -430,28 +435,28 @@ export const Calculator: FC = () => {
                 className=" button bank-offer__button"
                 onClick={onReqSubmit}
               >
-                Оформить заявку
+                {t('calculator.bankOfferButton')}
               </button>
             </div>
           ) : (
             <div className="calculator__offer">
               <div className="bank-offer bank-offer--no-offer">
                 <h2 className="bank-offer__title">
-                  Наш банк не выдаёт{' '}
+                  {t('calculator.bankOfferError.0')}{' '}
                   <span>
                     {selectValue === 1 && 'ипотечные'}
                     {selectValue === 2 && 'автокредиты'}
                   </span>{' '}
                   <br />
-                  кредиты меньше{' '}
+                  {t('calculator.bankOfferError.1')}{' '}
                   <span>
                     {selectValue === 1 && '500 000'}
                     {selectValue === 2 && '200 000'}
                   </span>
-                  рублей
+                  {t('calculator.currencyName')}
                 </h2>
                 <p className="offer-option__description">
-                  Попробуйте использовать другие параметры для расчёта.
+                  {t('calculator.bankOfferError.2')}
                 </p>
               </div>
             </div>

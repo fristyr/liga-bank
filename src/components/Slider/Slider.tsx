@@ -3,11 +3,12 @@ import Swiper from 'react-id-swiper';
 import './Slider.scss';
 import images from './images';
 import { publicSrc } from '../../constants/publicSource';
+import { useTranslation } from 'react-i18next';
 
 export const Slider: React.FC = () => {
   const params = {
     centeredSlides: true,
-    loop: true,
+    loop: false,
     autoplay: {
       delay: 4000,
       disableOnInteraction: false,
@@ -17,6 +18,9 @@ export const Slider: React.FC = () => {
       clickable: true,
     },
   };
+
+  const { t } = useTranslation();
+
 
   return (
     <Swiper {...params}>
@@ -35,7 +39,7 @@ export const Slider: React.FC = () => {
         }) => (
           <section className="slider__item" key={id}>
             <div className={`slide-info slide-info--${id}`}>
-              <h1 className="slide-info__title">Лига Банк</h1>
+              <h1 className="slide-info__title">{t('title')}</h1>
               <p
                 className={`slide-info__description slide-info__description--${id}`}
               >

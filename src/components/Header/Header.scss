@@ -95,6 +95,11 @@
   @include bp(tablet) {
     margin-right: -6px;
   }
+
+  &__button {
+    display: flex;
+    align-items: center;
+  }
   &__icon {
     max-width: 20px;
     max-height: 22px;

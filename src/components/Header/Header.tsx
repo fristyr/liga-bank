@@ -1,19 +1,24 @@
 import React, { useState, FormEvent, useEffect } from 'react';
 import { Drawer } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
+import CustomSelect from 'react-select';
+import { ValueType } from 'react-select/src/types';
 import classNames from 'classnames';
 import Modal from '@material-ui/core/Modal';
 import Fade from '@material-ui/core/Fade';
-import logo from '../../assets/logo.svg';
 import Icon from '../../assets/login-icon';
-import logoModal from '../../assets/logo-modal.svg';
 import closeIcon from '../../assets/close-icon.svg';
 import burgerIcon from '../../assets/burger-logo.svg';
 import { Input } from '../Form/Input';
 import { publicSrc } from '../../constants/publicSource';
+import { customStyles } from './styles';
+
 import './Header.scss';
 import '../../scss/variables.scss';
 
 export const Header: React.FC = () => {
+  type OptionType = { label: string; value: string };
+
   const [burgerVisibility, setBurgerVisibility] = useState(false);
   const [loginVisibility, setLoginVisibility] = useState(false);
   const [credentials, setCredentials] = useState({
@@ -23,7 +28,9 @@ export const Header: React.FC = () => {
   });
   const [submitButtonState, setSubmitButtonState] = useState(true);
   const { username, password } = credentials;
-  
+
+  const { t, i18n } = useTranslation();
+
   useEffect(() => {
     if (username.length && password.length >= 5) {
       setSubmitButtonState(false);
@@ -50,50 +57,84 @@ export const Header: React.FC = () => {
     );
   };
 
+  const dataValues = [
+    { label: 'En', value: 'en' },
+    { label: 'Ru', value: 'ru' },
+  ];
+
   return (
     <header className="header">
       <button type="button" className="nav__sm-controller" onClick={burgerMenu}>
         <img src={burgerIcon} alt="burger-menu" />
       </button>
 
-      <img src={logo} className="header__logo" alt="header-logo" />
-
+      <img
+        src={`${publicSrc}/assets/logo/${t('logo')}.svg`}
+        className="header__logo"
+        alt="header-logo"
+      />
       <nav className="nav">
         <Drawer open={burgerVisibility} onClose={burgerMenu}>
           <a href="#offers" className="nav__link" onClick={burgerMenu}>
-            Услуги
+            {t('offerNames.offerNameOne')}
           </a>
           <a href="#calculator" className="nav__link" onClick={burgerMenu}>
-            Рассчитать кредит
+            {t('offerNames.offerNameTwo')}
           </a>
           <a href="#bank-branches" className="nav__link" onClick={burgerMenu}>
-            Контакты
+            {t('offerNames.offerNameThree')}
           </a>
           <a href="#footer" className="nav__link" onClick={burgerMenu}>
-            Задать вопрос
+            {t('offerNames.offerNameFour')}
           </a>
         </Drawer>
 
         <div className="nav__lg">
           <a href="#offers" className="nav__link">
-            Услуги
+            {t('offerNames.offerNameOne')}
           </a>
           <a href="#calculator" className="nav__link">
-            Рассчитать кредит
+            {t('offerNames.offerNameTwo')}
           </a>
           <a href="#bank-branches" className="nav__link">
-            Контакты
+            {t('offerNames.offerNameThree')}
           </a>
           <a href="#footer" className="nav__link">
-            Задать вопрос
+            {t('offerNames.offerNameFour')}
           </a>
         </div>
       </nav>
 
-      <button type="button" className="login" onClick={loginOpen}>
-        <Icon fill="#1F1E25" />
-        <span className="login__text">Войти в Интернет-банк</span>
-      </button>
+      <div className="login">
+        <button type="button" className="login__button" onClick={loginOpen}>
+          <Icon fill="#1F1E25" />
+          <span className="login__text">{t('login.title')}</span>
+        </button>
+        <div>
+          <CustomSelect
+            options={dataValues}
+            isMulti={false}
+            onChange={(selectedLang: ValueType<OptionType>) => {
+              const onChange = selectedLang as OptionType;
+              i18n.changeLanguage(onChange.value);
+            }}
+            styles={customStyles}
+            placeholder="En"
+            components={{
+              IndicatorSeparator: () => null,
+              DropdownIndicator: (state) => (
+                <div
+                  className={classNames('menu__select', {
+                    'menu__select--open': state.selectProps.menuIsOpen,
+                  })}
+                >
+                  <img src={`${publicSrc}/assets/chevron.svg`} alt="Arrow" />
+                </div>
+              ),
+            }}
+          />
+        </div>
+      </div>
 
       <Modal
         aria-labelledby="transition-modal-title"
@@ -112,13 +153,18 @@ export const Header: React.FC = () => {
           <form onSubmit={handleSubmit}>
             <div className="login-paper">
               <div className="modal-nav">
-                <img src={logoModal} alt="Modal-company-logo" />
+                <img
+                  src={`${publicSrc}/assets/logo/${t('logoModal')}.svg`}
+                  alt="Modal-company-logo"
+                />
                 <button type="button" onClick={loginOpen}>
                   <img src={closeIcon} alt="Close-modal-icon" />
                 </button>
               </div>
               <div className="login-input">
-                <span className="login-input__name">Логин</span>
+                <span className="login-input__name">
+                  {t('login.inputName')}
+                </span>
                 <Input
                   inputClassName="login-input__element-1"
                   autoFocus={true}
@@ -129,7 +175,9 @@ export const Header: React.FC = () => {
                 />
               </div>
               <div className="login-input">
-                <span className="login-input__name">Пароль</span>
+                <span className="login-input__name">
+                  {t('login.inputPassword')}
+                </span>
                 <Input
                   inputClassName="login-input__element-2"
                   inputType={credentials.typePassword ? 'password' : 'text'}
@@ -155,7 +203,7 @@ export const Header: React.FC = () => {
                 </button>
               </div>
               <span className="login-paper__forgot-password">
-                Забыли пароль?
+                {t('login.forgotPassword')}
               </span>
               <button
                 type="submit"
@@ -163,7 +211,7 @@ export const Header: React.FC = () => {
                   'button--disabled': submitButtonState,
                 })}
               >
-                Войти
+                {t('login.button')}
               </button>
             </div>
           </form>

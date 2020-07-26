@@ -9,11 +9,7 @@ import { publicSrc } from '../../constants/publicSource';
 import './Offers.scss';
 
 export const Offers: FC = () => {
-  const { t, i18n } = useTranslation();
-
-  const changeLanguage = (language: any) => {
-    i18n.changeLanguage(language);
-  };
+  const { t } = useTranslation();
 
   const swiperRef = useRef<SwiperRefNode>(null);
   const [slideIndex, setSlideIndex] = useState();
@@ -45,14 +41,7 @@ export const Offers: FC = () => {
 
   return (
     <section className="offers" id="offers">
-      <button type="button" onClick={() => changeLanguage('en')}>
-        EN
-      </button>
-      <button type="button" onClick={() => changeLanguage('ru')}>
-        RU
-      </button>
-
-      <p>{t('title')}</p>
+      
       <div className="offers-nav">
         {offersList.map((item, index) => (
           <button
@@ -126,7 +115,7 @@ export const Offers: FC = () => {
                         href={buttonLink}
                         className="button description__button"
                       >
-                        Узнать подробнее
+                        {t('offerNames.offerButton')}
                       </a>
                     )}
                     {__html && (

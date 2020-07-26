@@ -1,5 +1,34 @@
 {
-  "title": "title",
+  "title": "Liga Bank",
+  "logo": "logo-eng",
+  "logoModal": "liga-modal-logo-eng",
+  "login": {
+    "title": "Enter the Internet Bank",
+    "inputName": "Login",
+    "inputPassword": "Password",
+    "forgotPassword": "Forgot your password?",
+    "button": "Login"
+  },
+  "offerNames": {
+    "offerNameOne": "Services",
+    "offerNameTwo": "Calculate loan",
+    "offerNameThree": "Contacts",
+    "offerNameFour": "Ask a question",
+    "offerButton": "Find moore"
+  },
+  "sliderList": [
+    {
+      "description": "Loans for any occasion",
+      "buttonText": "Calculate loan"
+    },
+    {
+      "description": "Your confidence in the future"
+    },
+    {
+      "description": "Always there",
+      "buttonText": "Find a branch"
+    }
+  ],
   "offersList": [
     {
       "itemButton": "Contributions",
@@ -33,5 +62,73 @@
         "The League Pass app allows you to pay for tickets around the world."
       ]
     }
-  ]
+  ],
+  "calculator": {
+    "selectPlaceholder": "Select the purpose of the loan",
+    "selectValues": ["Mortgage credit lending", "Car lending", "Consumer loan"],
+    "title": "Loan calculator",
+    "steps": [
+      "Step 1. Purpose of the loan",
+      "Step 2. Enter the parameters of the loan",
+      "Step 3. Registration of the application"
+    ],
+    "descriptionName": [
+      "Property value",
+      "Cost of the car",
+      "Consumer loan amount!"
+    ],
+    "currencyName": "rubles",
+    "priceGap": [
+      "From 1,200,000 to 25,000,000 rubles",
+      "From 500,000 to 5,000,000 rubles",
+      "From 50,000 to 3,000,000 rubles"
+    ],
+    "initialFee": "Initial Fee",
+    "term": ["Loan term", "years"],
+    "checkBoxNames": [
+      "Use maternity capital",
+      "Get CASCO in our bank",
+      "Obtain Life Insurance in our bank",
+      "Participant of the salary project of our bank"
+    ],
+    "offer": "Our offer",
+    "bankOfferTitle": ["Mortgage Amount", "Car Loan Amount", "Loan Amount"],
+    "bankOfferDescription": [
+      "Interest rate",
+      "Monthly payment",
+      "Necessary income"
+    ],
+    "bankOfferButton": "Submit an application",
+    "bankOfferError": [
+      "Our bank does not issue",
+      "loans are less",
+      "Try using other parameters for the calculation."
+    ],
+    "errorText": "Invalid value"
+  },
+  "loan": {
+    "purpose": ["Mortgage", "Car loan", "Consumer loan"],
+    "name": ["Property value", "Car value", "Loan amount"],
+    "title": [
+      "Application number",
+      "Purpose of the loan",
+      "An initial fee",
+      "Loan terms"
+    ],
+    "input": ["Full name", "Phone", "E-mail"],
+    "button": "Submit",
+    "submit": [
+      "Thank you for contacting our bank.",
+      "Our manager will soon contact you at the specified phone number."
+    ]
+  },
+  "bankBranches": {
+    "title": "Liga Bank branches",
+    "inputs": ["Russia", "CIS", "Europe"]
+  },
+  "footer": {
+    "location": "150015, Moscow, Moskovskaya str., 32 General license of the Bank of Russia No. 1050 Ⓒ Liga Bank, 2019",
+    "phoneText": "Free for subscribers of MTS, Beeline, Megafon, Tele2",
+    "phoneDescription": "Free for all cities of Russia"
+  }
 }
