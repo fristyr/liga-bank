@@ -99,6 +99,8 @@
   &__button {
     display: flex;
     align-items: center;
+    margin-right: 15px;
+    cursor: pointer;
   }
   &__icon {
     max-width: 20px;
@@ -117,7 +119,6 @@
     line-height: 19px;
     color: $main-color;
     transition: 250ms;
-    cursor: pointer;
     @include bp(desktop-md) {
       display: none;
     }
@@ -126,10 +127,10 @@
   &__icon path {
     transition: 250ms;
   }
-  &:hover .login__text {
+  &__button:hover .login__text {
     color: $accent-color;
   }
-  &:hover .login__icon path {
+  &__button:hover .login__icon path {
     fill: $accent-color;
   }
 }
