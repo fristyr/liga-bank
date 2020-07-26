@@ -6,12 +6,17 @@
   justify-content: space-between;
   flex-wrap: wrap;
   margin-bottom: 95px;
+  @include bp(desktop-md) {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
   @include bp(desktop-sm) {
     flex-direction: column;
     padding-left: 45px;
     padding-right: 45px;
     margin-bottom: 62px;
   }
+
   @include bp(tablet) {
     padding-left: 15px;
     padding-right: 15px;
@@ -26,6 +31,9 @@
   &__options {
     max-width: 600px;
     width: 100%;
+    @include bp(desktop-md) {
+      max-width: 500px;
+    }
     @include bp(desktop-sm) {
       max-width: initial;
     }
@@ -110,17 +118,23 @@
   padding: 15px;
   margin-bottom: 7px;
   transition: 250ms;
+  &:hover {
+    border: 1px solid $accent-color;
+  }
+  &--error {
+    border: 1px solid $error-color;
+    &:hover {
+      border: 1px solid $error-color;
+    }
+  }
   @include bp(desktop-sm) {
     padding: 16px;
   }
   @include bp(tablet) {
     padding-left: 12px;
-    padding-right: 21px;
+    padding-right: 12px;
   }
 
-  &:hover {
-    border: 1px solid $accent-color;
-  }
   &--fee {
     margin-bottom: 24px;
     @include bp(desktop-sm) {
@@ -150,7 +164,6 @@
   margin-left: -17px;
   @include bp(desktop-sm) {
     margin-left: -25px;
-
   }
   &__prefix-handler-wrap {
     display: flex;
@@ -163,12 +176,15 @@
     max-width: 550px;
     width: 100%;
     z-index: 1;
+    @include bp(desktop-md) {
+      max-width: 460px;
+    }
     @include bp(desktop-sm) {
-      max-width: 630px;
+      max-width: 93%;
+      transform: translate(-50.2%, -48%);
     }
     @include bp(tablet) {
-      max-width: 250px;
-      transform: translate(-48%, -50%);
+      max-width: 90%;
     }
   }
   &__prefix-input-wrap {
@@ -186,6 +202,24 @@
       font-size: 16px;
     }
   }
+  &__sign {
+    &--error-block {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5px;
+      border-radius: 5px;
+      left: 50%;
+      transform: translate(-50%, 2%);
+      z-index: 5;
+      background: #fff;
+      color: $error-color;
+      font-weight: bold;
+      max-width: 270px;
+      width: 100%;
+    }
+  }
   &__prefix-input-wrap > input {
     text-align: right;
     border: none;
@@ -199,7 +233,6 @@
     }
     @include bp(tablet) {
       margin-left: 8px;
-
     }
   }
   &__prefix--fee-input {
@@ -211,7 +244,7 @@
     line-height: 25px;
     text-align: right;
     border: none;
-    @include bp(desktop-sm) { 
+    @include bp(desktop-sm) {
       font-size: 16px;
       margin-left: -93px;
     }
@@ -243,13 +276,17 @@
   padding: 52px 60px 58px 60px;
   border-radius: 4px;
   max-width: 500px;
+  @include bp(desktop-md) {
+    padding: 37px 30px 30px 30px;
+  }
   @include bp(desktop-sm) {
     max-width: 100%;
+    padding: 52px 60px 58px 60px;
   }
   @include bp(tablet) {
     padding: 34px 16px 38px 16px;
   }
-  
+
   &--no-offer {
     max-width: 350px;
   }

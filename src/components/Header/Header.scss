@@ -55,7 +55,8 @@
       padding-right: 21px;
     }
     @include bp(tablet) {
-      padding-right: 0;
+      padding-right: 20px;
+      padding-top: 20px;
       padding-left: 20px;
       font-family: 'Roboto-Bold', sans-serif;
     }

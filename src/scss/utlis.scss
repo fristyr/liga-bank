@@ -1,10 +1,10 @@
 html {
   font-size: 16px;
-  scroll-behavior: smooth; 
+  scroll-behavior: smooth;
 }
 
 body {
-  font-family: 'Roboto-Regular';
+  font-family: 'Roboto-Regular', 'Arial', Verdana, sans-serif;;
 }
 a {
   text-decoration: none;
@@ -56,6 +56,11 @@ input[type='radio'].visually-hidden {
     background-color: $seconday-color;
     color: $main-color;
   }
+
+  &--disabled {
+    background: #353757;
+    cursor: not-allowed;
+  }
 }
 ul {
   margin: 0;
@@ -88,4 +93,8 @@ li {
   border-radius: 4px;
   background-color: transparent;
   width: 100%;
+}
+
+input:invalid {
+  box-shadow: none;
 }

@@ -37,50 +37,70 @@ export const Footer: FC = () => {
 
       <div className="footer__right">
         <div className="phone phone--mobile">
-          <p className="phone__numb">
+          <a href="tel:0904" className="phone__numb">
             <img
               src={`${publicSrc}/assets/footer/phone.svg`}
               alt="Phone-numb-icon"
             />
             *0904
-          </p>
+          </a>
           <p className="phone__text">
             Бесплатно для абонентов МТС, Билайн, Мегафон, Теле2
           </p>
         </div>
 
         <div className="phone phone--fix">
-          <p className="phone__numb">
+          <a href="tel:8-800-111-22-33" className="phone__numb">
             <img
               src={`${publicSrc}/assets/footer/fix-phone.svg`}
               alt="Phone-numb-icon"
             />
             8 800 111 22 33
-          </p>
+          </a>
           <p className="phone__text">Бесплатный для всех городов России</p>
         </div>
 
         <div className="socials">
-          <img
-            className="socials__icon"
-            src={`${publicSrc}/assets/footer/fb-icon.svg`}
-            alt="fb"
-          />
-          <img
-            className="socials__icon"
-            src={`${publicSrc}/assets/footer/insta.svg`}
-            alt="inst"
-          />
-          <img
-            className="socials__icon"
-            src={`${publicSrc}/assets/footer/twitt.svg`}
-            alt="twitt"
-          />
-          <img
-            className="socials__icon"
-            src={`${publicSrc}/assets/footer/youtube.svg`}
-            alt="yout"
-          />
+          <a href="https://www.facebook.com/" rel="noopener noreferrer" target="_blank">
+            <img
+              className="socials__icon"
+              src={`${publicSrc}/assets/footer/fb-icon.svg`}
+              alt="fb"
+            />
+          </a>
+          <a
+            href="https://www.instagram.com/?hl=en"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <img
+              className="socials__icon"
+              src={`${publicSrc}/assets/footer/insta.svg`}
+              alt="inst"
+            />
+          </a>
+          <a
+            href="https://twitter.com/explore"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <img
+              className="socials__icon"
+              src={`${publicSrc}/assets/footer/twitt.svg`}
+              alt="twitt"
+            />
+          </a>
+          <a
+            href="https://www.youtube.com/?hl=en"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <img
+              className="socials__icon"
+              src={`${publicSrc}/assets/footer/youtube.svg`}
+              alt="yout"
+            />
+          </a>
         </div>
       </div>
     </footer>

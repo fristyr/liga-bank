@@ -1,5 +1,6 @@
-import React, { useState, FormEvent } from 'react';
+import React, { useState, FormEvent, useEffect } from 'react';
 import { Drawer } from '@material-ui/core';
+import classNames from 'classnames';
 import Modal from '@material-ui/core/Modal';
 import Fade from '@material-ui/core/Fade';
 import logo from '../../assets/logo.svg';
@@ -9,7 +10,6 @@ import closeIcon from '../../assets/close-icon.svg';
 import burgerIcon from '../../assets/burger-logo.svg';
 import { Input } from '../Form/Input';
 import { publicSrc } from '../../constants/publicSource';
-
 import './Header.scss';
 import '../../scss/variables.scss';
 
@@ -21,6 +21,16 @@ export const Header: React.FC = () => {
     password: '',
     typePassword: true,
   });
+  const [submitButtonState, setSubmitButtonState] = useState(true);
+  const { username, password } = credentials;
+  
+  useEffect(() => {
+    if (username.length && password.length >= 5) {
+      setSubmitButtonState(false);
+    } else {
+      setSubmitButtonState(true);
+    }
+  }, [username, password]);
 
   const burgerMenu = () => {
     setBurgerVisibility(!burgerVisibility);
@@ -32,7 +42,8 @@ export const Header: React.FC = () => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    const { username, password } = credentials;
+
+    setCredentials({ ...credentials, username: '', password: '' });
     localStorage.setItem(
       'User-login-data',
       JSON.stringify({ username, password })
@@ -49,16 +60,16 @@ export const Header: React.FC = () => {
 
       <nav className="nav">
         <Drawer open={burgerVisibility} onClose={burgerMenu}>
-          <a href="#offers" className="nav__link">
+          <a href="#offers" className="nav__link" onClick={burgerMenu}>
             Услуги
           </a>
-          <a href="#calculator" className="nav__link">
+          <a href="#calculator" className="nav__link" onClick={burgerMenu}>
             Рассчитать кредит
           </a>
-          <a href="#bank-branches" className="nav__link">
+          <a href="#bank-branches" className="nav__link" onClick={burgerMenu}>
             Контакты
           </a>
-          <a href="#footer" className="nav__link">
+          <a href="#footer" className="nav__link" onClick={burgerMenu}>
             Задать вопрос
           </a>
         </Drawer>
@@ -111,6 +122,7 @@ export const Header: React.FC = () => {
                 <Input
                   inputClassName="login-input__element-1"
                   autoFocus={true}
+                  inputValue={credentials.username}
                   onInputChange={(e: string) => {
                     setCredentials({ ...credentials, username: e });
                   }}
@@ -121,6 +133,7 @@ export const Header: React.FC = () => {
                 <Input
                   inputClassName="login-input__element-2"
                   inputType={credentials.typePassword ? 'password' : 'text'}
+                  inputValue={credentials.password}
                   onInputChange={(e: string) => {
                     setCredentials({ ...credentials, password: e });
                   }}
@@ -144,7 +157,12 @@ export const Header: React.FC = () => {
               <span className="login-paper__forgot-password">
                 Забыли пароль?
               </span>
-              <button type="submit" className="button login-paper__button">
+              <button
+                type="submit"
+                className={classNames('button login-paper__button', {
+                  'button--disabled': submitButtonState,
+                })}
+              >
                 Войти
               </button>
             </div>

@@ -10,6 +10,7 @@ export const BankBranches: FC = () => {
     cis: false,
     europe: false,
   });
+
   return (
     <section className="bank-branches" id="bank-branches">
       <h2 className="bank-branches__title">Отделения Лига Банка</h2>

@@ -21,6 +21,7 @@
     "node-sass": "^4.14.1",
     "rc-input-number": "^5.1.0",
     "react": "^16.13.1",
+    "react-app-polyfill": "^1.0.6",
     "react-dom": "^16.13.1",
     "react-i18next": "^11.7.0",
     "react-id-swiper": "^4.0.0",
@@ -47,12 +48,13 @@
   },
   "browserslist": {
     "production": [
-      "defaults",
-      "> 5%",
+      ">0.2%",
       "not dead",
-      "not op_mini all"
+      "not op_mini all",
+      "ie 9"
     ],
     "development": [
+      "ie 11",
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"

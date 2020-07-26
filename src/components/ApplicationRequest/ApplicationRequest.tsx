@@ -1,5 +1,6 @@
-import React, { FC, FormEvent, useState } from 'react';
+import React, { FC, FormEvent, useState, useEffect } from 'react';
 import Modal from '@material-ui/core/Modal';
+import classNames from 'classnames';
 import { Input } from '../Form/Input';
 import closeIcon from '../../assets/close-icon.svg';
 
@@ -10,6 +11,9 @@ interface Props {
   priceValue?: number;
   initialFee?: number;
   years?: number;
+  setApllicationForm?: React.Dispatch<React.SetStateAction<boolean>>;
+  loanNumber?: number;
+  setLoanNumber?: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export const ApplicationRequest: FC<Props> = ({
@@ -17,23 +21,10 @@ export const ApplicationRequest: FC<Props> = ({
   priceValue,
   initialFee,
   years,
+  setApllicationForm,
+  loanNumber,
+  setLoanNumber,
 }) => {
-  const data = [
-    { title: 'Номер заявки', description: '№ 0010', id: '1' },
-    { title: 'Цель кредита', description: selectValue, id: '2' },
-    {
-      title: 'Стоимость недвижимости',
-      description: `${priceValue} рублей`,
-      id: '3',
-    },
-    {
-      title: 'Первоначальный взнос',
-      description: `${initialFee} рублей`,
-      id: '4',
-    },
-    { title: 'Срок кредитования', description: `${years} рублей`, id: '5' },
-  ];
-
   const [reqCredentials, setReqCredentials] = useState({
     name: '',
     phone: '',
@@ -41,14 +32,50 @@ export const ApplicationRequest: FC<Props> = ({
   });
 
   const [reqConfirmModal, setReqConfirmModal] = useState(false);
+  const [submitButtonState, setSubmitButtonState] = useState(true);
 
-  const reqModalVisibility = () => {
-    setReqConfirmModal(!reqConfirmModal);
+  const { name, phone, email } = reqCredentials;
+
+  useEffect(() => {
+    if (name.length && phone.length && email.length >= 5) {
+      setSubmitButtonState(false);
+    } else {
+      setSubmitButtonState(true);
+    }
+  }, [name, phone, email]);
+
+
+  useEffect(() => {
+    if (window.innerWidth < 768)
+      window.scrollTo({ top: 1700, behavior: 'smooth' });
+
+    if (window.innerWidth < 400)
+      window.scrollTo({ top: 1850, behavior: 'smooth' });
+
+    if (window.innerWidth > 768)
+      window.scrollTo({ top: 2000, behavior: 'smooth' });
+  });
+
+  const loanPurpose = () => {
+    let v = '';
+    if (selectValue === 1) v = 'Ипотека';
+    if (selectValue === 2) v = 'Автокредит';
+    if (selectValue === 3) v = 'Потребительский кредит';
+    return v;
+  };
+
+  const loanName = () => {
+    let v = '';
+    if (selectValue === 1) v = 'Стоимость недвижимости';
+    if (selectValue === 2) v = 'Стоимость автомобиля';
+    if (selectValue === 3) v = 'Сумма кредита';
+    return v;
   };
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    const { name, phone, email } = reqCredentials;
+    setReqCredentials({ ...reqCredentials, name: '', phone: '', email: '' });
+
     const reqData = {
       selectValue,
       priceValue,
@@ -59,18 +86,50 @@ export const ApplicationRequest: FC<Props> = ({
       email,
     };
     localStorage.setItem('Credit request', JSON.stringify(reqData));
-    reqModalVisibility();
+
+    setReqConfirmModal(true);
   };
+
+  const reqModalVisibility = () => {
+    setLoanNumber(loanNumber + 1);
+    setApllicationForm(false);
+    setReqConfirmModal(!reqConfirmModal);
+  };
+
+  const regexReplace = /\B(?=(\d{3})+(?!\d))/g;
+
+  const data = [
+    { title: 'Номер заявки', description: `№ 00${loanNumber}`, id: '1' },
+    { title: 'Цель кредита', description: loanPurpose(), id: '2' },
+    {
+      title: loanName(),
+      description: `${priceValue
+        .toFixed(0)
+        .toString()
+        .replace(regexReplace, ' ')} рублей`,
+      id: '3',
+    },
+    {
+      title: 'Первоначальный взнос',
+      description: `${initialFee
+        .toFixed(0)
+        .toString()
+        .replace(regexReplace, ' ')} рублей`,
+      id: '4',
+    },
+    { title: 'Срок кредитования', description: `${years} лет`, id: '5' },
+  ];
 
   return (
     <form
       className="application-form"
       onSubmit={handleSubmit}
-      id="application-form"
+      //id="application-form"
     >
       <h2 className="calculator__step application-form__title">
         Шаг 3. Оформление заявки
       </h2>
+
       <div className="req-block">
         {data.map(({ title, description, id }) => (
           <div className="req-item" key={id}>
@@ -86,6 +145,10 @@ export const ApplicationRequest: FC<Props> = ({
             onInputChange={(e: string) => {
               setReqCredentials({ ...reqCredentials, name: e });
             }}
+            inputValue={name}
+            autoFocus={true}
+            inputType="text"
+            inputRequired={true}
           />
         </div>
         <div className="grid-input">
@@ -95,6 +158,9 @@ export const ApplicationRequest: FC<Props> = ({
             onInputChange={(e: string) => {
               setReqCredentials({ ...reqCredentials, phone: e });
             }}
+            inputValue={phone}
+            inputType="number"
+            inputRequired={true}
           />
           <Input
             inputPlaceholder="E-mail"
@@ -102,10 +168,19 @@ export const ApplicationRequest: FC<Props> = ({
             onInputChange={(e: string) => {
               setReqCredentials({ ...reqCredentials, email: e });
             }}
+            inputValue={email}
+            inputType="email"
+            inputRequired={true}
           />
         </div>
       </div>
-      <button type="submit" className="button application-form__button">
+      <button
+        disabled={submitButtonState}
+        type="submit"
+        className={classNames('button application-form__button', {
+          'button--disabled': submitButtonState,
+        })}
+      >
         Отправить
       </button>
 
